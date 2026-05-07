@@ -3333,8 +3333,8 @@ function updateAdminBannerDisplay(bgColor, textColor, texts) {
         // Arkaplan rengini güncelle
         bannerStrip.style.background = bgColor;
         
-        // texts yoksa veya boşsa, varsayılan mesaj göster
-        if (!texts || texts.length === 0) {
+        // texts parametresi kontrolü - eğer undefined veya boşsa varsayılan kullan
+        if (!texts || !Array.isArray(texts) || texts.length === 0) {
             texts = ['Hoş Geldiniz'];
         }
         

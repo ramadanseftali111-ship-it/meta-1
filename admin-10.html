@@ -3291,11 +3291,11 @@ function loadSeoAciklamasi() {
 
 <script>
 // =============================================
-// KAYAN YAZI ŞERİDİ YÖNETİMİ - ADMİN 10
+// HIZLI SİPARİŞ ŞERİDİ YÖNETİMİ - ADMİN 10
 // =============================================
 
-// Banner ayarlarını yükle
-function loadBannerSettings() {
+function updateSiparisSeridiSettings() {
+    var bgColor = document.getElementById('siparisSeridiBgColor').value || '#4A90E2';
     var textColor = document.getElementById('siparisSeridiTextColor').value || '#ffffff';
     
     // DEBUG: Konsola yazdır
@@ -3320,11 +3320,9 @@ function loadBannerSettings() {
                 console.log('🔥 Firebase\'e kaydedildi (admin10/siparisSeridiColors):', colorData);
             }).catch(function(error) {
                 console.error('❌ Firebase kayıt hatası:', error);
-                alert('❌ Kayıt hatası: ' + error.message);
             });
         } catch(e) {
             console.error('❌ Firebase işlem hatası:', e);
-            alert('❌ Hata: ' + e.message);
         }
     });
     
@@ -3357,9 +3355,9 @@ function loadSiparisSeridiSettings() {
             if (data) {
                 bgColor = data.bgColor || '#4A90E2';
                 textColor = data.textColor || '#ffffff';
-                console.log('🔥 Firebase\'den yüklendi:', data);
+                console.log('🔥 Firebase\'den yüklendi (admin10):', data);
             } else {
-                console.log('⚠️ Firebase\'de renk yok, varsayılan kullanılıyor');
+                console.log('⚠️ Firebase\'de renk yok (admin10), varsayılan kullanılıyor');
             }
             
             // Form alanlarını güncelle
@@ -3405,6 +3403,7 @@ function updateSiparisSeridiFromText(type) {
         }
         if (textValue) {
             document.getElementById('siparisSeridiBgColor').value = textValue;
+            updateSiparisSeridiSettings();
         }
     } else if (type === 'text') {
         var textValue = document.getElementById('siparisSeridiTextColorText').value.trim();
@@ -3415,18 +3414,11 @@ function updateSiparisSeridiFromText(type) {
         }
         if (textValue) {
             document.getElementById('siparisSeridiTextColor').value = textValue;
+            updateSiparisSeridiSettings();
         }
     }
-    // Metin alanı kullanıldığında otomatik kaydet
-    updateSiparisSeridiSettings();
 }
 
-// Sayfa yüklendiğinde ayarları yükle
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        loadSiparisSeridiSettings();
-    }, 100);
-});
 </script>
 
 <script>

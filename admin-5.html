@@ -3346,6 +3346,140 @@ function loadSeoAciklamasi() {
 
 <script>
 // =============================================
+// HIZLI SİPARİŞ ŞERİDİ YÖNETİMİ - ADMİN 5
+// =============================================
+
+function updateSiparisSeridiSettings() {
+    var bgColor = document.getElementById('siparisSeridiBgColor').value || '#4A90E2';
+    var textColor = document.getElementById('siparisSeridiTextColor').value || '#ffffff';
+    
+    // DEBUG: Konsola yazdır
+    console.log('💾 KAYDET - Hızlı Sipariş Şeridi (Admin-5):');
+    console.log('BG Color Value:', bgColor);
+    console.log('Text Color Value:', textColor);
+    
+    // Hızlı sipariş şeridini güncelle
+    updateSiparisSeridiDisplay(bgColor, textColor);
+    
+    // 🔥 Firebase'e kaydet (ADMIN-5'E ÖZEL YOL)
+    onFirebaseReady(function(db) {
+        try {
+            var colorData = {
+                bgColor: bgColor,
+                textColor: textColor,
+                timestamp: Date.now()
+            };
+            
+            // Renkleri Firebase'e kaydet - ADMIN-5'E ÖZEL
+            db.ref('www_emenkargon_online/admin5/siparisSeridiColors').set(colorData).then(function() {
+                console.log('🔥 Firebase\'e kaydedildi (admin5/siparisSeridiColors):', colorData);
+            }).catch(function(error) {
+                console.error('❌ Firebase kayıt hatası:', error);
+            });
+        } catch(e) {
+            console.error('❌ Firebase işlem hatası:', e);
+        }
+    });
+    
+    console.log('✅ Hızlı sipariş şeridi ayarları kaydedildi (Admin-5)');
+}
+
+function updateSiparisSeridiDisplay(bgColor, textColor) {
+    var siparisSeridi = document.getElementById('siparisSeridi');
+    var siparisSeridiText = document.getElementById('siparisSeridiText');
+    
+    if (siparisSeridi && siparisSeridiText) {
+        // Arkaplan rengini güncelle
+        siparisSeridi.style.background = bgColor;
+        
+        // Yazı rengini güncelle
+        siparisSeridiText.style.color = textColor;
+        
+        console.log('✅ Hızlı sipariş şeridi görünümü güncellendi');
+    }
+}
+
+function loadSiparisSeridiSettings() {
+    // 🔥 Firebase'den renkleri yükle - ADMIN-5'E ÖZEL YOL
+    onFirebaseReady(function(db) {
+        db.ref('www_emenkargon_online/admin5/siparisSeridiColors').once('value').then(function(snapshot) {
+            var data = snapshot.val();
+            var bgColor = '#4A90E2';
+            var textColor = '#ffffff';
+            
+            if (data) {
+                bgColor = data.bgColor || '#4A90E2';
+                textColor = data.textColor || '#ffffff';
+                console.log('🔥 Firebase\'den yüklendi (admin5):', data);
+            } else {
+                console.log('⚠️ Firebase\'de renk yok (admin5), varsayılan kullanılıyor');
+            }
+            
+            // Form alanlarını güncelle
+            var bgColorInput = document.getElementById('siparisSeridiBgColor');
+            var textColorInput = document.getElementById('siparisSeridiTextColor');
+            var bgColorTextInput = document.getElementById('siparisSeridiBgColorText');
+            var textColorTextInput = document.getElementById('siparisSeridiTextColorText');
+            
+            if (bgColorInput) bgColorInput.value = bgColor;
+            if (textColorInput) textColorInput.value = textColor;
+            if (bgColorTextInput) bgColorTextInput.value = bgColor;
+            if (textColorTextInput) textColorTextInput.value = textColor;
+            
+            // Hızlı sipariş şeridini güncelle
+            updateSiparisSeridiDisplay(bgColor, textColor);
+            
+            console.log('✅ Hızlı sipariş şeridi ayarları yüklendi (Admin-5):', bgColor, textColor);
+        }).catch(function(error) {
+            console.error('❌ Firebase okuma hatası:', error);
+        });
+    });
+}
+
+function updateSiparisSeridiFromColor(type) {
+    if (type === 'bg') {
+        var colorValue = document.getElementById('siparisSeridiBgColor').value;
+        document.getElementById('siparisSeridiBgColorText').value = colorValue;
+    } else if (type === 'text') {
+        var colorValue = document.getElementById('siparisSeridiTextColor').value;
+        document.getElementById('siparisSeridiTextColorText').value = colorValue;
+    }
+    // Renk seçici kullanıldığında otomatik kaydet ve Firebase'e gönder
+    updateSiparisSeridiSettings();
+}
+
+function updateSiparisSeridiFromText(type) {
+    if (type === 'bg') {
+        var textValue = document.getElementById('siparisSeridiBgColorText').value.trim();
+        // Eğer # ile başlamıyorsa ekle
+        if (textValue && !textValue.startsWith('#')) {
+            textValue = '#' + textValue;
+            document.getElementById('siparisSeridiBgColorText').value = textValue;
+        }
+        if (isValidColor(textValue)) {
+            document.getElementById('siparisSeridiBgColor').value = textValue;
+            // Otomatik kaydet ve Firebase'e gönder
+            updateSiparisSeridiSettings();
+        }
+    } else if (type === 'text') {
+        var textValue = document.getElementById('siparisSeridiTextColorText').value.trim();
+        // Eğer # ile başlamıyorsa ekle
+        if (textValue && !textValue.startsWith('#')) {
+            textValue = '#' + textValue;
+            document.getElementById('siparisSeridiTextColorText').value = textValue;
+        }
+        if (isValidColor(textValue)) {
+            document.getElementById('siparisSeridiTextColor').value = textValue;
+            // Otomatik kaydet ve Firebase'e gönder
+            updateSiparisSeridiSettings();
+        }
+    }
+}
+
+</script>
+
+<script>
+// =============================================
 // KAYAN YAZI ŞERİDİ YÖNETİMİ - ADMİN 5
 // =============================================
 
