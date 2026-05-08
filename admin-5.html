@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -179,7 +179,7 @@ function updateBannerFromText(type) {
 <div id="topDrawer" class="open">
 <div style="display:grid;grid-template-columns:repeat(10, 1fr);gap:2px;">
 <button onclick="window.location.href='admin-1.html'" style="background:#000 !important;color:#fff !important;border:none;padding:20px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:16px;height:65px;display:flex;align-items:center;justify-content:center;gap:5px;">ADMİN 1 <span style="font-size:20px;cursor:pointer" onclick="event.stopPropagation();window.location.href='urunx-1.html'">👁️</span></button>
-<button onclick="window.location.href='Admin-5.html'" style="background:#000 !important;color:#fff !important;border:none;padding:20px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:16px;height:65px;display:flex;align-items:center;justify-content:center;gap:5px;">ADMİN 5 <span style="font-size:20px;cursor:pointer" onclick="event.stopPropagation();window.location.href='urunx-2.html'">👁️</span></button>
+<button onclick="window.location.href='admin-2.html'" style="background:#000 !important;color:#fff !important;border:none;padding:20px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:16px;height:65px;display:flex;align-items:center;justify-content:center;gap:5px;">ADMİN 2 <span style="font-size:20px;cursor:pointer" onclick="event.stopPropagation();window.location.href='urunx-2.html'">👁️</span></button>
 <button onclick="window.location.href='admin-3.html'" style="background:#000 !important;color:#fff !important;border:none;padding:20px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:16px;height:65px;display:flex;align-items:center;justify-content:center;gap:5px;">ADMİN 3 <span style="font-size:20px;cursor:pointer" onclick="event.stopPropagation();window.location.href='urunx-3.html'">👁️</span></button>
 <button onclick="window.location.href='admin-4.html'" style="background:#000 !important;color:#fff !important;border:none;padding:20px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:16px;height:65px;display:flex;align-items:center;justify-content:center;gap:5px;">ADMİN 4 <span style="font-size:20px;cursor:pointer" onclick="event.stopPropagation();window.location.href='urunx-4.html'">👁️</span></button>
 <button onclick="window.location.href='admin-5.html'" style="background:#000 !important;color:#fff !important;border:none;padding:20px 10px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:16px;height:65px;display:flex;align-items:center;justify-content:center;gap:5px;">ADMİN 5 <span style="font-size:20px;cursor:pointer" onclick="event.stopPropagation();window.location.href='urunx-5.html'">👁️</span></button>
@@ -530,7 +530,6 @@ function updateBannerFromText(type) {
 <div style="display:flex;gap:5px;margin-bottom:15px;">
 <input type="text" id="bottomImg1Url" placeholder="URL gir..." style="flex:1;height:35px;border:2px solid #ddd;border-radius:6px;padding:0 10px;font-size:12px;" onkeypress="if(event.key==='Enter') loadImageFromUrl('bottomImg1')">
 <button onclick="loadImageFromUrl('bottomImg1')" style="background:#000 !important;color:#fff;border:none;padding:0 15px;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer;margin-right:5px;">YÜKLE</button>
-
 </div>
 </div>
 </div>
@@ -1636,6 +1635,8 @@ function deleteImage(event, imgId) {
                 console.error('❌ Firebase silme hatası:', error);
             });
     }
+    
+    console.log('✅ Görsel silindi: ' + imgId);
 }
 
 function loadSavedImages() {
@@ -2038,7 +2039,7 @@ function loadBannerSettings() {
 function scrollToForm() {
     const formLabel = document.querySelector('.formLabel');
     if (formLabel) {
-        formLabel.scrollIntoView({ behavior: 'auto', block: 'start' });
+        formLabel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -2990,14 +2991,14 @@ function toggleUrunSecenegi(urunNo) {
     if (typeof database !== 'undefined' && database) {
         var data = {};
         data['urun' + urunNo + '_aktif'] = aktif;
-        database.ref(SITE_ID + '/urunAyarlari/urun5/toggleDurumlari').update(data);
+        database.ref(SITE_ID + '/urunAyarlari/admin5/toggleDurumlari').update(data);
     } else if (typeof onFirebaseReady === 'function') {
         var savedUrunNo = urunNo;
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
             var data = {};
             data['urun' + savedUrunNo + '_aktif'] = savedAktif;
-            db.ref(SITE_ID + '/urunAyarlari/urun5/toggleDurumlari').update(data);
+            db.ref(SITE_ID + '/urunAyarlari/admin5/toggleDurumlari').update(data);
         });
     }
     
@@ -3030,11 +3031,11 @@ function toggleRenkAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun5/toggleDurumlari').update({ renk_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin5/toggleDurumlari').update({ renk_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun5/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin5/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
         });
     }
     
@@ -3067,11 +3068,11 @@ function toggleBedenAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun5/toggleDurumlari').update({ beden_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin5/toggleDurumlari').update({ beden_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun5/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin5/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
         });
     }
     
@@ -3088,7 +3089,7 @@ function getBedenButtonId(bedenAdi) {
 function loadUrunDurumlari() {
     // Firebase'den toggle durumlarını çek
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun5/toggleDurumlari').once('value', function(snapshot) {
+        database.ref(SITE_ID + '/urunAyarlari/admin5/toggleDurumlari').once('value', function(snapshot) {
             var data = snapshot.val();
             if (data) {
                 // Firebase'den gelen verileri localStorage'a yaz
@@ -3515,17 +3516,14 @@ function updateBannerSettings() {
                 timestamp: Date.now()
             };
             
-            // Banner renklerini Firebase'e kaydet (ADMIN-2 için)
+            // Banner renklerini Firebase'e kaydet (ADMIN-5 için)
             db.ref('www_emenkargon_online/admin5/bannerColors').set(bannerData).then(function() {
                 console.log('🔥 Firebase\'e kaydedildi - Banner renkleri tüm cihazlarda görünecek:', bannerData);
-                alert('✅ Kayan yazı renkleri kaydedildi! Tüm cihazlarda görünecek.');
             }).catch(function(error) {
                 console.error('❌ Firebase kayıt hatası:', error);
-                alert('❌ Kayıt hatası: ' + error.message);
             });
         } catch(e) {
             console.error('❌ Firebase işlem hatası:', e);
-            alert('❌ Hata: ' + e.message);
         }
     });
     
@@ -3540,14 +3538,21 @@ function updateAdminBannerDisplay(bgColor, textColor, texts) {
         // Arkaplan rengini güncelle
         bannerStrip.style.background = bgColor;
         
-        // texts yoksa veya boşsa, varsayılan mesaj göster
+        // texts yoksa veya boşsa, SABİT varsayılan metinleri kullan
         if (!texts || texts.length === 0) {
-            texts = ['Hoş Geldiniz'];
+            texts = [
+                '🚚 AYNI GÜN KARGO',
+                '💳 KAPIDA ÖDEME',
+                '📦 HIZLI TESLİMAT',
+                '🔒 GÜVENLİ ALIŞVERİŞ',
+                '⭐ %100 MÜŞTERİ MEMNUNİYETİ',
+                '✅ ÜCRETSİZ KARGO'
+            ];
         }
         
-        // İçeriği oluştur (2 kez tekrarla ki kesintisiz dönsün)
+        // İçeriği oluştur (5 kez tekrarla - admin-1 gibi)
         var htmlContent = '';
-        for (var j = 0; j < 2; j++) {
+        for (var j = 0; j < 5; j++) {
             for (var i = 0; i < texts.length; i++) {
                 htmlContent += '<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">' + texts[i] + '</span>';
             }

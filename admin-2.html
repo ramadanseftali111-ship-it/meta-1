@@ -241,12 +241,6 @@ function updateBannerFromText(type) {
     document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🔒 GÜVENLİ ALIŞVERİŞ</span>');
     document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">⭐ %100 MÜŞTERİ MEMNUNİYETİ</span>');
     document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">✅ ÜCRETSİZ KARGO</span>');
-    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🚚 AYNI GÜN KARGO</span>');
-    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">💳 KAPIDA ÖDEME</span>');
-    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">📦 HIZLI TESLİMAT</span>');
-    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🔒 GÜVENLİ ALIŞVERİŞ</span>');
-    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">⭐ %100 MÜŞTERİ MEMNUNİYETİ</span>');
-    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">✅ ÜCRETSİZ KARGO</span>');
     document.write('</div>');
     document.write('</div>');
     document.write('</div>');
@@ -352,24 +346,6 @@ function updateBannerFromText(type) {
 <h3 style="color:#e94560;font-weight:900;margin-bottom:15px;margin-top:30px;border-bottom:2px solid #e94560;padding-bottom:10px;">📢 KAYAN YAZI ŞERİDİ</h3>
 
 <div style="margin-bottom:15px;">
-  <div style="margin-bottom:10px;">
-    <label style="display:block;font-weight:bold;margin-bottom:5px;color:#000;">Arkaplan Rengi:</label>
-    <div style="display:flex;gap:5px;align-items:center;">
-      <input type="color" id="bannerBgColor" value="#000000" style="width:60px;height:40px;border:2px solid #ddd;border-radius:6px;cursor:pointer;box-sizing:border-box;" onchange="updateBannerFromColor('bg')">
-      <input type="text" id="bannerBgColorText" value="#000000" placeholder="#000000" style="flex:1;height:40px;border:2px solid #ddd;border-radius:6px;padding:0 10px;font-size:14px;font-family:monospace;box-sizing:border-box;" onchange="updateBannerFromText('bg')" onkeyup="updateBannerFromText('bg')" onpaste="setTimeout(function(){updateBannerFromText('bg')}, 10)">
-    </div>
-  </div>
-  <div style="margin-bottom:10px;">
-    <label style="display:block;font-weight:bold;margin-bottom:5px;color:#000;">Yazı Rengi:</label>
-    <div style="display:flex;gap:5px;align-items:center;">
-      <input type="color" id="bannerTextColor" value="#ffffff" style="width:60px;height:40px;border:2px solid #ddd;border-radius:6px;cursor:pointer;box-sizing:border-box;" onchange="updateBannerFromColor('text')">
-      <input type="text" id="bannerTextColorText" value="#ffffff" placeholder="#ffffff" style="flex:1;height:40px;border:2px solid #ddd;border-radius:6px;padding:0 10px;font-size:14px;font-family:monospace;box-sizing:border-box;" onchange="updateBannerFromText('text')" onkeyup="updateBannerFromText('text')" onpaste="setTimeout(function(){updateBannerFromText('text')}, 10)">
-    </div>
-  </div>
-</div>
-
-<div style="margin-bottom:15px;padding:15px;background:#f8f9fa;border-radius:8px;border:2px solid #ddd;">
-  <h4 style="margin:0 0 10px 0;color:#333;font-size:14px;">🎨 Şerit Renkleri:</h4>
   <div style="margin-bottom:10px;">
     <label style="display:block;font-weight:bold;margin-bottom:5px;color:#000;">Arkaplan Rengi:</label>
     <div style="display:flex;gap:5px;align-items:center;">
@@ -554,7 +530,6 @@ function updateBannerFromText(type) {
 <div style="display:flex;gap:5px;margin-bottom:15px;">
 <input type="text" id="bottomImg1Url" placeholder="URL gir..." style="flex:1;height:35px;border:2px solid #ddd;border-radius:6px;padding:0 10px;font-size:12px;" onkeypress="if(event.key==='Enter') loadImageFromUrl('bottomImg1')">
 <button onclick="loadImageFromUrl('bottomImg1')" style="background:#000 !important;color:#fff;border:none;padding:0 15px;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer;margin-right:5px;">YÜKLE</button>
-
 </div>
 </div>
 </div>
@@ -1525,7 +1500,7 @@ function toggleLeftDrawer() {
     }
 }
 
-var pageId = getAdminKey('admin_1_sayfa');
+var pageId = getAdminKey('admin_2_sayfa');
 
 function loadImage(event, imgId) {
     const file = event.target.files[0];
@@ -2062,7 +2037,7 @@ function loadBannerSettings() {
 function scrollToForm() {
     const formLabel = document.querySelector('.formLabel');
     if (formLabel) {
-        formLabel.scrollIntoView({ behavior: 'auto', block: 'start' });
+        formLabel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -2917,14 +2892,14 @@ function toggleUrunSecenegi(urunNo) {
     if (typeof database !== 'undefined' && database) {
         var data = {};
         data['urun' + urunNo + '_aktif'] = aktif;
-        database.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').update(data);
+        database.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').update(data);
     } else if (typeof onFirebaseReady === 'function') {
         var savedUrunNo = urunNo;
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
             var data = {};
             data['urun' + savedUrunNo + '_aktif'] = savedAktif;
-            db.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').update(data);
+            db.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').update(data);
         });
     }
     
@@ -2957,11 +2932,11 @@ function toggleRenkAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').update({ renk_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').update({ renk_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
         });
     }
     
@@ -2994,11 +2969,11 @@ function toggleBedenAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').update({ beden_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').update({ beden_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
         });
     }
     
@@ -3015,7 +2990,7 @@ function getBedenButtonId(bedenAdi) {
 function loadUrunDurumlari() {
     // Firebase'den toggle durumlarını çek
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').once('value', function(snapshot) {
+        database.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').once('value', function(snapshot) {
             var data = snapshot.val();
             if (data) {
                 // Firebase'den gelen verileri localStorage'a yaz
@@ -3311,7 +3286,6 @@ function updateBannerSettings() {
             // Banner renklerini Firebase'e kaydet (ADMIN-2 için)
             db.ref('www_emenkargon_online/admin2/bannerColors').set(bannerData).then(function() {
                 console.log('🔥 Firebase\'e kaydedildi - Banner renkleri tüm cihazlarda görünecek:', bannerData);
-                alert('✅ Kayan yazı renkleri kaydedildi! Tüm cihazlarda görünecek.');
             }).catch(function(error) {
                 console.error('❌ Firebase kayıt hatası:', error);
                 alert('❌ Kayıt hatası: ' + error.message);
@@ -3333,14 +3307,14 @@ function updateAdminBannerDisplay(bgColor, textColor, texts) {
         // Arkaplan rengini güncelle
         bannerStrip.style.background = bgColor;
         
-        // texts parametresi kontrolü - eğer undefined veya boşsa varsayılan kullan
+        // texts parametresi kontrolü - eğer undefined veya boşsa SABİT YAZILARI kullan
         if (!texts || !Array.isArray(texts) || texts.length === 0) {
-            texts = ['Hoş Geldiniz'];
+            texts = ['🚚 AYNI GÜN KARGO', '💳 KAPIDA ÖDEME', '📦 HIZLI TESLİMAT', '🔒 GÜVENLİ ALIŞVERİŞ', '⭐ %100 MÜŞTERİ MEMNUNİYETİ', '✅ ÜCRETSİZ KARGO'];
         }
         
-        // İçeriği oluştur (2 kez tekrarla ki kesintisiz dönsün)
+        // İçeriği oluştur (5 kez tekrarla - admin-1 gibi)
         var htmlContent = '';
-        for (var j = 0; j < 2; j++) {
+        for (var j = 0; j < 5; j++) {
             for (var i = 0; i < texts.length; i++) {
                 htmlContent += '<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">' + texts[i] + '</span>';
             }

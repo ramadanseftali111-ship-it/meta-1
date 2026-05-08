@@ -458,9 +458,9 @@ function updateBannerDisplay(bgColor, textColor) {
             '✅ ÜCRETSİZ KARGO'
         ];
         
-        // İçeriği oluştur (2 kez tekrarla ki kesintisiz dönsün)
+        // İçeriği oluştur (5 kez tekrarla - admin-1 gibi)
         var htmlContent = '';
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < 5; i++) {
             fixedTexts.forEach(function(text) {
                 htmlContent += '<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">' + text + '</span>';
             });
@@ -2142,7 +2142,7 @@ window.addEventListener('DOMContentLoaded', function() {
     // Firebase hazır olunca toggle durumlarını çek
     if (typeof onFirebaseReady === 'function') {
         onFirebaseReady(function() {
-            database.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').once('value', function(snapshot) {
+            database.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').once('value', function(snapshot) {
                 var data = snapshot.val();
                 if (data) {
                     for (var key in data) {

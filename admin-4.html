@@ -524,7 +524,6 @@ function updateBannerFromText(type) {
 <div style="display:flex;gap:5px;margin-bottom:15px;">
 <input type="text" id="bottomImg1Url" placeholder="URL gir..." style="flex:1;height:35px;border:2px solid #ddd;border-radius:6px;padding:0 10px;font-size:12px;" onkeypress="if(event.key==='Enter') loadImageFromUrl('bottomImg1')">
 <button onclick="loadImageFromUrl('bottomImg1')" style="background:#000 !important;color:#fff;border:none;padding:0 15px;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer;margin-right:5px;">YÜKLE</button>
-
 </div>
 </div>
 </div>
@@ -1491,7 +1490,7 @@ function toggleLeftDrawer() {
     }
 }
 
-var pageId = getAdminKey('admin_1_sayfa');
+var pageId = getAdminKey('admin_4_sayfa');
 
 function loadImage(event, imgId) {
     const file = event.target.files[0];
@@ -2033,7 +2032,7 @@ function loadToggleStates() {
 function scrollToForm() {
     const formLabel = document.querySelector('.formLabel');
     if (formLabel) {
-        formLabel.scrollIntoView({ behavior: 'auto', block: 'start' });
+        formLabel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -3003,14 +3002,14 @@ function toggleUrunSecenegi(urunNo) {
     if (typeof database !== 'undefined' && database) {
         var data = {};
         data['urun' + urunNo + '_aktif'] = aktif;
-        database.ref(SITE_ID + '/urunAyarlari/urun4/toggleDurumlari').update(data);
+        database.ref(SITE_ID + '/urunAyarlari/admin4/toggleDurumlari').update(data);
     } else if (typeof onFirebaseReady === 'function') {
         var savedUrunNo = urunNo;
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
             var data = {};
             data['urun' + savedUrunNo + '_aktif'] = savedAktif;
-            db.ref(SITE_ID + '/urunAyarlari/urun4/toggleDurumlari').update(data);
+            db.ref(SITE_ID + '/urunAyarlari/admin4/toggleDurumlari').update(data);
         });
     }
     
@@ -3043,11 +3042,11 @@ function toggleRenkAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun4/toggleDurumlari').update({ renk_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin4/toggleDurumlari').update({ renk_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun4/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin4/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
         });
     }
     
@@ -3080,11 +3079,11 @@ function toggleBedenAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun4/toggleDurumlari').update({ beden_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin4/toggleDurumlari').update({ beden_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun4/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin4/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
         });
     }
     
@@ -3101,7 +3100,7 @@ function getBedenButtonId(bedenAdi) {
 function loadUrunDurumlari() {
     // Firebase'den toggle durumlarını çek
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun4/toggleDurumlari').once('value', function(snapshot) {
+        database.ref(SITE_ID + '/urunAyarlari/admin4/toggleDurumlari').once('value', function(snapshot) {
             var data = snapshot.val();
             if (data) {
                 // Firebase'den gelen verileri localStorage'a yaz
@@ -3473,8 +3472,8 @@ function updateAdminBannerDisplay(bgColor, textColor, texts) {
         // Eğer yazılar verilmişse, banner içeriğini tamamen yeniden oluştur
         if (texts && texts.length > 0) {
             var newContent = '';
-            // Yazıları 2 kez tekrarla (kayan efekt için)
-            for (var j = 0; j < 2; j++) {
+            // Yazıları 5 kez tekrarla (admin-1 gibi)
+            for (var j = 0; j < 5; j++) {
                 for (var i = 0; i < texts.length; i++) {
                     newContent += '<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">' + texts[i] + '</span>';
                 }

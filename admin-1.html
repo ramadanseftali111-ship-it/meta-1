@@ -522,7 +522,6 @@ function updateBannerFromText(type) {
 <div style="display:flex;gap:5px;margin-bottom:15px;">
 <input type="text" id="bottomImg1Url" placeholder="URL gir..." style="flex:1;height:35px;border:2px solid #ddd;border-radius:6px;padding:0 10px;font-size:12px;" onkeypress="if(event.key==='Enter') loadImageFromUrl('bottomImg1')">
 <button onclick="loadImageFromUrl('bottomImg1')" style="background:#000 !important;color:#fff;border:none;padding:0 15px;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer;margin-right:5px;">YÜKLE</button>
-
 </div>
 </div>
 </div>
@@ -1975,7 +1974,7 @@ function localStorageDanYukle() {
 function scrollToForm() {
     const formLabel = document.querySelector('.formLabel');
     if (formLabel) {
-        formLabel.scrollIntoView({ behavior: 'auto', block: 'start' });
+        formLabel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -2112,7 +2111,7 @@ function kaydetUrunBilgi(urunNo) {
         data['urun' + urunNo + '_eski_fiyat'] = eskiFiyat;
         data['urun' + urunNo + '_etiket'] = etiket;
         if (tasarruf) data['urun' + urunNo + '_tasarruf'] = tasarruf;
-        database.ref(SITE_ID + '/urunAyarlari/urun1/urunBilgileri').update(data);
+        database.ref(SITE_ID + '/urunAyarlari/admin1/urunBilgileri').update(data);
     }
     
     console.log('✅ Ürün ' + urunNo + ' bilgileri kaydedildi');
@@ -2121,7 +2120,7 @@ function kaydetUrunBilgi(urunNo) {
 function yukleUrunBilgileri() {
     // Önce Firebase'den oku
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun1/urunBilgileri').once('value', function(snapshot) {
+        database.ref(SITE_ID + '/urunAyarlari/admin1/urunBilgileri').once('value', function(snapshot) {
             var data = snapshot.val();
             if (data) {
                 for (var i = 1; i <= 8; i++) {
@@ -2850,14 +2849,14 @@ function toggleUrunSecenegi(urunNo) {
     if (typeof database !== 'undefined' && database) {
         var data = {};
         data['urun' + urunNo + '_aktif'] = aktif;
-        database.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').update(data);
+        database.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').update(data);
     } else if (typeof onFirebaseReady === 'function') {
         var savedUrunNo = urunNo;
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
             var data = {};
             data['urun' + savedUrunNo + '_aktif'] = savedAktif;
-            db.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').update(data);
+            db.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').update(data);
         });
     }
     
@@ -2890,11 +2889,11 @@ function toggleRenkAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').update({ renk_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').update({ renk_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').update({ renk_ana_aktif: savedAktif });
         });
     }
     
@@ -2927,11 +2926,11 @@ function toggleBedenAnaSwitch() {
     
     // Firebase'e kaydet
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').update({ beden_ana_aktif: aktif });
+        database.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').update({ beden_ana_aktif: aktif });
     } else if (typeof onFirebaseReady === 'function') {
         var savedAktif = aktif;
         onFirebaseReady(function(db) {
-            db.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
+            db.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').update({ beden_ana_aktif: savedAktif });
         });
     }
     
@@ -2948,7 +2947,7 @@ function getBedenButtonId(bedenAdi) {
 function loadUrunDurumlari() {
     // Firebase'den toggle durumlarını çek
     if (typeof database !== 'undefined' && database) {
-        database.ref(SITE_ID + '/urunAyarlari/urun1/toggleDurumlari').once('value', function(snapshot) {
+        database.ref(SITE_ID + '/urunAyarlari/admin1/toggleDurumlari').once('value', function(snapshot) {
             var data = snapshot.val();
             if (data) {
                 // Firebase'den gelen verileri localStorage'a yaz

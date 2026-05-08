@@ -228,6 +228,24 @@ function getAdminKey(key) {
     document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🔒 GÜVENLİ ALIŞVERİŞ</span>');
     document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">⭐ %100 MÜŞTERİ MEMNUNİYETİ</span>');
     document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">✅ ÜCRETSİZ KARGO</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🚚 AYNI GÜN KARGO</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">💳 KAPIDA ÖDEME</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">📦 HIZLI TESLİMAT</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🔒 GÜVENLİ ALIŞVERİŞ</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">⭐ %100 MÜŞTERİ MEMNUNİYETİ</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">✅ ÜCRETSİZ KARGO</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🚚 AYNI GÜN KARGO</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">💳 KAPIDA ÖDEME</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">📦 HIZLI TESLİMAT</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🔒 GÜVENLİ ALIŞVERİŞ</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">⭐ %100 MÜŞTERİ MEMNUNİYETİ</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">✅ ÜCRETSİZ KARGO</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🚚 AYNI GÜN KARGO</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">💳 KAPIDA ÖDEME</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">📦 HIZLI TESLİMAT</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">🔒 GÜVENLİ ALIŞVERİŞ</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">⭐ %100 MÜŞTERİ MEMNUNİYETİ</span>');
+    document.write('<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">✅ ÜCRETSİZ KARGO</span>');
     document.write('</div>');
     document.write('</div>');
 })();
@@ -417,9 +435,9 @@ function updateBannerDisplay(bgColor, textColor) {
             '✅ ÜCRETSİZ KARGO'
         ];
         
-        // İçeriği oluştur (2 kez tekrarla ki kesintisiz dönsün)
+        // İçeriği oluştur (5 kez tekrarla - admin-1 gibi)
         var htmlContent = '';
-        for (var i = 0; i < 2; i++) {
+        for (var i = 0; i < 5; i++) {
             fixedTexts.forEach(function(text) {
                 htmlContent += '<span style="color:' + textColor + ';font-size:12px;font-weight:bold;margin-right:50px;">' + text + '</span>';
             });
@@ -442,9 +460,17 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="formWrapper" style="position:relative;">
 
 <!-- HIZLI SİPARİŞ FORMU ÇUBUĞU -->
-<div id="siparisSeridi" style="width:100%;background:#fff;padding:10px 0;text-align:center;border-radius:8px 8px 0 0;margin-bottom:10px;">
-<span id="siparisSeridiText" style="color:#000;font-size:20px;font-weight:900;letter-spacing:2px;display:inline-block;animation:buyukKucul 0.8s ease-in-out infinite;">📋 HIZLI SİPARİŞ FORMU</span>
-</div>
+<script>
+// Hızlı Sipariş Şeridi renklerini HEMEN al ve HTML'i oluştur
+(function() {
+    var bgColor = localStorage.getItem('www_emenkargon_online_admin2_siparis_seridi_bg_color') || '#fff';
+    var textColor = localStorage.getItem('www_emenkargon_online_admin2_siparis_seridi_text_color') || '#000';
+    
+    document.write('<div id="siparisSeridi" style="width:100%;background:' + bgColor + ';padding:10px 0;text-align:center;border-radius:8px 8px 0 0;margin-bottom:10px;">');
+    document.write('<span id="siparisSeridiText" style="color:' + textColor + ';font-size:20px;font-weight:900;letter-spacing:2px;display:inline-block;animation:buyukKucul 0.8s ease-in-out infinite;">📋 HIZLI SİPARİŞ FORMU</span>');
+    document.write('</div>');
+})();
+</script>
 
 <label class="formLabel" style="margin-top:0">Ödeme Yöntemi:</label>
 <div class="radioBox" style="border:2px solid #000 !important;">
@@ -1172,11 +1198,7 @@ function loadSavedData() {
         if (savedFiyat) {
             var fiyatEl = document.getElementById('urun' + i + 'FiyatDisplay');
             if (fiyatEl) {
-                if (savedFiyat.indexOf('TL') === -1) {
-                    fiyatEl.textContent = savedFiyat + 'TL';
-                } else {
-                    fiyatEl.textContent = savedFiyat;
-                }
+                fiyatEl.textContent = savedFiyat;
             }
         }
         
@@ -1209,7 +1231,7 @@ function ilkGoruneniSec() {
 function scrollToForm() {
     const formLabel = document.querySelector('.formLabel');
     if (formLabel) {
-        formLabel.scrollIntoView({ behavior: 'auto', block: 'start' });
+        formLabel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -2089,7 +2111,7 @@ window.addEventListener('DOMContentLoaded', function() {
     // Firebase hazır olunca toggle durumlarını çek
     if (typeof onFirebaseReady === 'function') {
         onFirebaseReady(function() {
-            database.ref(SITE_ID + '/urunAyarlari/urun2/toggleDurumlari').once('value', function(snapshot) {
+            database.ref(SITE_ID + '/urunAyarlari/admin2/toggleDurumlari').once('value', function(snapshot) {
                 var data = snapshot.val();
                 if (data) {
                     for (var key in data) {
@@ -2414,40 +2436,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // Her 200ms'de kontrol et
     setInterval(checkColors, 200);
     
-    // ÜRÜN FORUM AYARLARINI ZORLA TRUE YAP - HEPSİNİ AKTİF ET
-    for (var i = 1; i <= 8; i++) {
-        var urunKey = getAdminKey('urun' + i + '_aktif');
-        localStorage.setItem(urunKey, 'true'); // ZORLA TRUE YAP
-        console.log('✅ Ürün ' + i + ' aktif edildi: ' + urunKey);
-    }
+    // ÜRÜN AYARLARINI LOCALSTORAGE'DAN OKU - ZORLA TRUE YAPMA!
+    console.log('📋 Ürün ayarları localStorage\'dan okunuyor...');
     
     // RENK ve BEDEN toggle durumlarını kontrol et (admin'den gelir)
     console.log('✅ Renk/Beden toggle durumları admin ayarlarından okunacak');
     
-    // İlk seçeneği seçili yap
-    const firstElement = document.getElementById('secim1');
-    if (firstElement) {
-        const container = firstElement.closest('div[style*="border: 2px solid"]');
-        if (container) {
-            container.style.border = '2px solid #000';
-            container.style.backgroundColor = '#f8fff8';
-            console.log('✅ İlk seçenek border ayarlandı');
-        }
+    // FORUM AYARLARINI HEMEN YÜKLE - ÖNCE!
+    if (typeof loadUrunSecenekleri === 'function') {
+        loadUrunSecenekleri();
+        console.log('✅ loadUrunSecenekleri çağrıldı');
     }
     
-    // Renk/beden seçeneklerini göster
-    if (typeof toggleOptions === 'function') {
-        toggleOptions(1);
-        console.log('✅ toggleOptions(1) çağrıldı');
-    }
-    
-    // FORUM AYARLARINI HEMEN YÜKLE
+    // İlk aktif ürünü seçili yap
     setTimeout(function() {
-        console.log('🔄 loadUrunSecenekleri çağrılıyor...');
-        if (typeof loadUrunSecenekleri === 'function') {
-            loadUrunSecenekleri();
+        var ilkAktifUrun = null;
+        for (var i = 1; i <= 8; i++) {
+            var aktif = localStorage.getItem(getAdminKey('urun' + i + '_aktif')) !== 'false';
+            if (aktif) {
+                ilkAktifUrun = i;
+                break;
+            }
         }
-    }, 100);
+        
+        if (ilkAktifUrun) {
+            var firstRadio = document.getElementById('secim' + ilkAktifUrun);
+            if (firstRadio) {
+                firstRadio.checked = true;
+                updateBorder(ilkAktifUrun);
+                console.log('✅ İlk aktif ürün seçildi: ' + ilkAktifUrun);
+            }
+        }
+    }, 50);
     
     // toggleOptions fonksiyonu zaten doğru kontrol yapıyor - ek temizlik gerekmez
     
