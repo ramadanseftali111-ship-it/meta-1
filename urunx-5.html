@@ -16,8 +16,7 @@ fbq('track', 'PageView');
 function fireMetaLeadEvent(value) {
     if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead', { value: value || 0, currency: 'TRY' });
-        fbq('track', 'Purchase', { value: value || 0, currency: 'TRY' });
-        console.log('✅ Meta Lead/Purchase event - Değer:', value);
+        console.log('✅ Meta Lead event - Değer:', value);
     }
 }
 
@@ -1375,8 +1374,9 @@ function validateForm() {
             
             database.ref(SITE_ID + '/siparisler').push(yeniSiparis);
             
-            // Teşekkür kartını hemen göster (webhook'u bekleme)
-            showSuccessModal();
+            // Teşekkür kartını göster + Meta Pixel tetikle
+            var fiyatNumeric = parseFloat(tutar.replace(/[^0-9]/g, '')) || 0;
+            showSuccessModal(fiyatNumeric);
             
             // ========== MAKE.COM WEBHOOK ==========
             // Kargo ölçülerini Firebase'den al
@@ -1495,27 +1495,14 @@ function validateForm() {
                 // Aktivite kaydı
                 if(typeof aktiviteKaydet === 'function') aktiviteKaydet('siparis', 'Yeni sipariş: ' + ad + ' - ' + tutar);
                 
-                // Stok düşür - Forum 1
+                // Stok düşür - Forum 5
                 var adetSayi = secimNum;
-                database.ref(SITE_ID + '/forumStoklar/forum1').once('value', function(snapshot){
+                database.ref(SITE_ID + '/forumStoklar/forum5').once('value', function(snapshot){
                     var mevcutStok = snapshot.val() || 0;
                     var yeniStok = mevcutStok - adetSayi;
                     if(yeniStok < 0) yeniStok = 0;
-                    database.ref(SITE_ID + '/forumStoklar/forum1').set(yeniStok);
+                    database.ref(SITE_ID + '/forumStoklar/forum5').set(yeniStok);
                 });
-                
-                // Pixel eventleri tetikle (sipariş başarıyla kaydedildi)
-                var fiyatNumeric = parseFloat(tutar.replace(/[^0-9]/g, '')) || 0;
-                
-                // Meta Pixel Lead eventi
-                if(typeof fireMetaLeadEvent === 'function'){
-                    fireMetaLeadEvent(fiyatNumeric);
-                }
-                
-                // TikTok Pixel eventi
-                if(typeof fireTikTokSubmitFormEvent === 'function'){
-                    fireTikTokSubmitFormEvent(fiyatNumeric);
-                }
             });
             // ==========================================
         });
@@ -1524,9 +1511,15 @@ function validateForm() {
     return false;
 }
 
-function showSuccessModal() {
+function showSuccessModal(fiyat) {
     const modal = document.getElementById('successModal');
     modal.classList.add('show');
+    
+    // 🎯 TEŞEKKÜR KARTINDA META PIXEL PURCHASE EVENT TETİKLE
+    if (typeof fbq !== 'undefined' && fiyat) {
+        fbq('track', 'Purchase', { value: fiyat, currency: 'TRY' });
+        console.log('✅ Meta Purchase event tetiklendi (Teşekkür kartında) - Değer:', fiyat);
+    }
     
     // 8 saniye sonra kapat
     setTimeout(() => {
