@@ -163,8 +163,7 @@ function fireMetaLeadEvent(value) {
     // Meta
     if (window.metaPixelId && typeof fbq !== 'undefined') {
         fbq('track', 'Lead', { value: value || 0, currency: 'TRY' });
-        fbq('track', 'Purchase', { value: value || 0, currency: 'TRY' });
-        console.log('✅ Meta Lead/Purchase event');
+        console.log('✅ Meta Lead event');
     }
 }
 
