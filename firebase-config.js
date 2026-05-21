@@ -41,7 +41,7 @@ function getUserFirebaseConfig() {
 // VARSAYILAN FIREBASE AYARLARI
 // Müşteri domain-bagla.html'den kendi Firebase bilgilerini girerse, o kullanılır (öncelik)
 // Girmezse bu varsayılan Firebase kullanılır (telefonda çalışması için)
-var firebaseConfig = {
+var defaultFirebaseConfig = {
     apiKey: "AIzaSyBiEXcIGsBTCHpuFtQMTDU-uYsuxvASR8I",
     authDomain: "hizlikargo-93a30.firebaseapp.com",
     databaseURL: "https://hizlikargo-93a30-default-rtdb.europe-west1.firebasedatabase.app",
@@ -51,6 +51,16 @@ var firebaseConfig = {
     appId: "",
     measurementId: ""
 };
+
+// Kullanıcının kendi Firebase'ini kontrol et, yoksa varsayılanı kullan
+var userConfig = getUserFirebaseConfig();
+var firebaseConfig = userConfig || defaultFirebaseConfig;
+
+if (userConfig) {
+    console.log('🔥 Kullanıcının kendi Firebase\'i kullanılıyor:', userConfig.projectId);
+} else {
+    console.log('🔥 Varsayılan Firebase kullanılıyor:', defaultFirebaseConfig.projectId);
+}
 
 // Firebase değişkenleri
 var database = null;

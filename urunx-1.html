@@ -72,6 +72,7 @@ function getAdminKey(key) {
     // Title'ı hemen değiştir
     if (urunAdi && urunAdi !== 'Ürün') {
         document.title = urunAdi + ' - Hızlı Kargo | emenkargon.online';
+        console.log('🎯 İlk title ayarlandı:', document.title);
     }
     
     // Meta description'ı hemen değiştir
@@ -923,6 +924,57 @@ function loadSiparisSeridiColors() {
 
 <script src="site-config.js"></script>
 <script>
+// 🌐 DOMAIN OTOMATİK DEĞİŞTİRME SİSTEMİ - GARANTİLİ ÇÖZÜM
+(function() {
+    var eskiDomain = 'emenkargon.online';
+    var yeniDomain = localStorage.getItem('__SITE_DOMAIN__') || eskiDomain;
+    
+    console.log('🌐 Domain Sistemi Aktif - Yeni Domain:', yeniDomain);
+    
+    // Title değiştirme fonksiyonu (GÜÇLÜ)
+    function titleDegistir() {
+        var titleElement = document.getElementsByTagName('title')[0];
+        if (titleElement) {
+            var currentTitle = titleElement.innerHTML;
+            if (currentTitle) {
+                var regex = new RegExp(eskiDomain, 'gi');
+                if (regex.test(currentTitle)) {
+                    var yeniTitle = currentTitle.replace(regex, yeniDomain);
+                    titleElement.innerHTML = yeniTitle;
+                    console.log('✅ Title güncellendi:', yeniTitle);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    // İlk kontrol
+    setTimeout(function() {
+        console.log('🔍 İlk title:', document.title);
+        titleDegistir();
+    }, 100);
+    
+    // Her 100ms'de kontrol et (çok sık)
+    var kontrolSayisi = 0;
+    var interval = setInterval(function() {
+        if (titleDegistir() || kontrolSayisi > 100) {
+            clearInterval(interval);
+        }
+        kontrolSayisi++;
+    }, 100);
+    
+    // MutationObserver ile title elementini izle
+    var titleElement = document.getElementsByTagName('title')[0];
+    if (titleElement) {
+        var observer = new MutationObserver(function() {
+            console.log('🔄 Title değişti:', document.title);
+            titleDegistir();
+        });
+        observer.observe(titleElement, { childList: true, characterData: true, subtree: true });
+    }
+})();
+
 
 const ilceler = {
     adana: ['Aladağ', 'Ceyhan', 'Çukurova', 'Feke', 'İmamoğlu', 'Karaisalı', 'Karataş', 'Kozan', 'Pozantı', 'Saimbeyli', 'Sarıçam', 'Seyhan', 'Tufanbeyli', 'Yumurtalık', 'Yüreğir'],
@@ -2496,9 +2548,16 @@ function yukleUrunBilgileriCustomer() {
                 localStorage.setItem(getAdminKey('genel_urun_adi'), urunAdi);
                 console.log('✅ Genel ürün adı Firebase\'den yüklendi: ' + urunAdi);
                 
-                // DİNAMİK BAŞLIK GÜNCELLEMESİ
-                document.title = urunAdi + ' | Hızlı Kargo - emenkargon.online';
-                document.getElementById('pageTitle').textContent = urunAdi + ' | Hızlı Kargo - emenkargon.online';
+                // Domain'i Firebase'den çek
+                database.ref(SITE_ID + '/siteSettings/domain').once('value', function(domainSnapshot) {
+                    var siteDomain = domainSnapshot.val() || localStorage.getItem('__SITE_DOMAIN__') || 'emenkargon.online';
+                    console.log('🌐 Domain Firebase\'den yüklendi:', siteDomain);
+                    
+                    // DİNAMİK BAŞLIK GÜNCELLEMESİ
+                    document.title = urunAdi + ' | Hızlı Kargo - emenkargon.online';
+                    document.getElementById('pageTitle').textContent = urunAdi + ' | Hızlı Kargo - emenkargon.online';
+                    console.log('🎯 Title güncellendi:', document.title);
+                });
             }
         });
         

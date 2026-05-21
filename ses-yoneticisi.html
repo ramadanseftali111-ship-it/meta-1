@@ -743,7 +743,7 @@ function getSesKey(key) {
 
 // ========== IndexedDB AYARLARI ==========
 var dbName = getSesKey('ramco_ses_db');
-var dbVersion = 1;
+var dbVersion = 2; // Version 2'ye güncellendi
 var sesDB = null;
 
 // IndexedDB aç
@@ -860,17 +860,22 @@ var sesTipIsimleri = {
   hata: 'Hata Sesi'
 };
 
-// Sayfa yüklenince kayıtlı sesleri ve müzikleri yükle
-window.onload = async function() {
+// Sayfa yüklendiğinde IndexedDB'yi aç ve verileri yükle
+window.addEventListener('load', async function() {
+  console.log('🎵 Ses yöneticisi başlatılıyor...');
+  
   try {
     await indexedDBac();
+    console.log('✅ IndexedDB açıldı');
     
     // IndexedDB'den müzikleri yükle
     muzikListesi = await muzikleriGetirDB();
+    console.log('📀 Müzik listesi yüklendi:', muzikListesi.length, 'adet');
     muzikListesiGuncelle();
     
     // IndexedDB'den sesleri yükle
     var kayitliSesler = await sesleriGetirDB();
+    console.log('🔊 Sesler yüklendi:', kayitliSesler.length, 'adet');
     kayitliSesler.forEach(function(ses) {
       sesler[ses.tip] = { data: ses.data, isim: ses.isim };
       durumGuncelle(ses.tip, true, ses.isim);
@@ -879,13 +884,13 @@ window.onload = async function() {
     // Eski localStorage verilerini IndexedDB'ye taşı (migration)
     await eskiVerileriTasi();
     
-    console.log('Ses yöneticisi hazır! Müzik sayısı:', muzikListesi.length);
-  } catch(e) {
-    console.error('Yükleme hatası:', e);
-    // Fallback: localStorage kullan
+    console.log('✅ Ses yöneticisi hazır! Müzik sayısı:', muzikListesi.length);
+  } catch(err) {
+    console.error('❌ IndexedDB hatası:', err);
+    console.log('📦 Fallback: localStorage kullanılıyor');
     eskiYontemYukle();
   }
-};
+});
 
 // Eski localStorage verilerini IndexedDB'ye taşı
 async function eskiVerileriTasi() {
@@ -949,6 +954,7 @@ function eskiYontemYukle() {
 
 // ========== MÜZİK LİSTESİ FONKSİYONLARI ==========
 
+// Sayfa yüklendiğinde IndexedDB'yi aç
 // Müzik yükle
 function muzikDosyaYukle(input) {
   console.log('Müzik yükleme başladı');
@@ -984,9 +990,6 @@ function muzikDosyaYukleDevam(files) {
     var file = files[i];
     console.log('Yükleniyor:', file.name, 'Boyut:', (file.size / 1024 / 1024).toFixed(2) + ' MB');
     
-    // Dosya boyutu bilgisi
-    console.log('Dosya boyutu:', (file.size / 1024 / 1024).toFixed(2) + ' MB');
-    
     var reader = new FileReader();
     reader.onload = (function(fileName) {
       return function(e) {
@@ -1004,21 +1007,29 @@ function muzikDosyaYukleDevam(files) {
         // IndexedDB'ye kaydet
         if (sesDB) {
           muzikKaydetDB(yeniMuzik).then(function() {
-            console.log('IndexedDB kaydedildi:', fileName);
+            console.log('✅ IndexedDB kaydedildi:', fileName);
           }).catch(function(err) {
-            console.log('IndexedDB hatası:', err);
+            console.error('❌ IndexedDB hatası:', err);
           });
+        }
+        
+        // localStorage'a da yedekle (fallback için)
+        try {
+          localStorage.setItem(getSesKey('ramco_muzik_listesi'), JSON.stringify(muzikListesi));
+          console.log('✅ localStorage yedeklendi');
+        } catch(e) {
+          console.warn('⚠️ localStorage dolu, sadece IndexedDB kullanılıyor');
         }
         
         yuklenenSayi++;
         if (yuklenenSayi === toplamSayi) {
-          toastGoster('✓ ' + yuklenenSayi + ' müzik yüklendi!');
+          toastGoster('✓ ' + yuklenenSayi + ' müzik yüklendi ve kaydedildi!');
         }
       };
     })(file.name);
     
     reader.onerror = function(err) {
-      console.log('Dosya okuma hatası:', err);
+      console.error('❌ Dosya okuma hatası:', err);
       toastGoster('❌ Dosya okunamadı!');
     };
     
@@ -1063,7 +1074,28 @@ function muzikSec(id) {
         isim: muzik.isim
       };
       durumGuncelle(secimHedef, true, muzik.isim);
-      toastGoster('✓ ' + muzik.isim + ' → ' + sesTipIsimleri[secimHedef]);
+      
+      // Otomatik kaydet
+      (async function() {
+        try {
+          if (sesDB) {
+            await sesKaydetDB(secimHedef, sesler[secimHedef]);
+          }
+          // localStorage'a da kaydet
+          var kaydedilecek = {};
+          ['ekran', 'siparis', 'bildirim', 'basari', 'hata'].forEach(function(t) {
+            if (sesler[t] && sesler[t].data) {
+              kaydedilecek[t] = sesler[t];
+            }
+          });
+          localStorage.setItem(getSesKey('ramco_sesler'), JSON.stringify(kaydedilecek));
+          
+          toastGoster('✓ ' + muzik.isim + ' → ' + sesTipIsimleri[secimHedef] + ' (Kaydedildi)');
+        } catch(err) {
+          console.error('Kaydetme hatası:', err);
+          toastGoster('✓ ' + muzik.isim + ' → ' + sesTipIsimleri[secimHedef]);
+        }
+      })();
     }
     secimIptal();
   } else {
@@ -1205,13 +1237,32 @@ function dosyaSec(tip, input) {
   if (!file) return;
   
   var reader = new FileReader();
-  reader.onload = function(e) {
+  reader.onload = async function(e) {
     sesler[tip] = {
       data: e.target.result,
       isim: file.name
     };
     durumGuncelle(tip, true, file.name);
-    toastGoster('✓ ' + file.name + ' yüklendi!');
+    
+    // Otomatik kaydet
+    try {
+      if (sesDB) {
+        await sesKaydetDB(tip, sesler[tip]);
+      }
+      // localStorage'a da kaydet
+      var kaydedilecek = {};
+      ['ekran', 'siparis', 'bildirim', 'basari', 'hata'].forEach(function(t) {
+        if (sesler[t] && sesler[t].data) {
+          kaydedilecek[t] = sesler[t];
+        }
+      });
+      localStorage.setItem(getSesKey('ramco_sesler'), JSON.stringify(kaydedilecek));
+      
+      toastGoster('✓ ' + file.name + ' yüklendi ve kaydedildi!');
+    } catch(err) {
+      console.error('Kaydetme hatası:', err);
+      toastGoster('✓ ' + file.name + ' yüklendi!');
+    }
   };
   reader.readAsDataURL(file);
 }
@@ -1233,10 +1284,18 @@ function durumGuncelle(tip, aktif, dosyaAdi) {
   }
 }
 
-// Ses test
+// Ses test - toggle (çal/durdur)
 function sesTest(tip) {
   if (!sesler[tip]) {
-    toastGoster('⚠️ Önce ses dosyası yükle!');
+    toastGoster('❌ ' + tip.toUpperCase() + ' sesi yüklenmemiş!');
+    return;
+  }
+  
+  // Eğer çalıyorsa durdur
+  if (audioObjeler[tip] && !audioObjeler[tip].paused) {
+    audioObjeler[tip].pause();
+    audioObjeler[tip].currentTime = 0;
+    toastGoster('⏸️ ' + sesler[tip].isim + ' durduruldu');
     return;
   }
   

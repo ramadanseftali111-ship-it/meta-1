@@ -105,6 +105,74 @@ function siteStorageGetJSON(key) {
 console.log('📦 Site Config yüklendi - SITE_ID:', SITE_ID);
 
 // ============================================
+// DOMAİN YÖNETİMİ
+// ============================================
+
+// Site domain'ini al (localStorage'dan veya otomatik)
+function getSiteDomain() {
+    // Önce localStorage'da kayıtlı domain var mı bak
+    var savedDomain = localStorage.getItem('__SITE_DOMAIN__');
+    if (savedDomain && savedDomain.length > 0) {
+        return savedDomain;
+    }
+    
+    // Yoksa mevcut domain'i kullan
+    var hostname = window.location.hostname;
+    if (hostname && hostname !== 'localhost' && hostname !== '127.0.0.1' && hostname !== '') {
+        return hostname;
+    }
+    
+    // Local dosya ise varsayılan domain
+    return 'emenkargon.online';
+}
+
+// Global değişken olarak domain'i sakla
+window.SITE_DOMAIN = getSiteDomain();
+console.log('🌐 Site Domain:', window.SITE_DOMAIN);
+
+// Title'ı sürekli kontrol et ve değiştir
+(function() {
+    var eskiDomain = 'emenkargon.online';
+    var yeniDomain = window.SITE_DOMAIN;
+    
+    // Title değiştirme fonksiyonu
+    function titleDegistir() {
+        if (document.title && document.title.includes(eskiDomain)) {
+            document.title = document.title.replace(new RegExp(eskiDomain, 'gi'), yeniDomain);
+            console.log('🔄 Title güncellendi:', document.title);
+        }
+    }
+    
+    // Sayfa yüklenince
+    titleDegistir();
+    
+    // Her 500ms'de bir kontrol et
+    setInterval(titleDegistir, 500);
+    
+    // MutationObserver ile title değişikliklerini izle
+    var titleElement = document.querySelector('title');
+    if (titleElement) {
+        var observer = new MutationObserver(titleDegistir);
+        observer.observe(titleElement, { childList: true, subtree: true, characterData: true });
+    }
+    
+    // document.title değiştirildiğinde yakala
+    var originalTitleSetter = Object.getOwnPropertyDescriptor(Document.prototype, 'title').set;
+    Object.defineProperty(Document.prototype, 'title', {
+        set: function(newTitle) {
+            if (newTitle && newTitle.includes(eskiDomain)) {
+                newTitle = newTitle.replace(new RegExp(eskiDomain, 'gi'), yeniDomain);
+                console.log('✅ Title otomatik değiştirildi:', newTitle);
+            }
+            originalTitleSetter.call(this, newTitle);
+        },
+        get: function() {
+            return document.getElementsByTagName('title')[0].innerHTML;
+        }
+    });
+})();
+
+// ============================================
 // 🔔 SES SİSTEMİ NOTU
 // ============================================
 // Ses fonksiyonları (siparisSesCal, bildirimSesCal vs.) 

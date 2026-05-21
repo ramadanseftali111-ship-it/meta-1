@@ -336,6 +336,20 @@ function girisYap() {
   var errorMsg = document.getElementById('errorMsg');
   var adminSifre = getAdminSifre().toLowerCase();
   
+  // 🔊 SES İZNİ AL - Giriş butonuna tıklandı, ses iznini şimdi alalım
+  try {
+    var sessizSes = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
+    sessizSes.volume = 0.01;
+    sessizSes.play().then(function() {
+      localStorage.setItem('sesIzniVerildi', 'true');
+      console.log('✅ Ses izni verildi! Admin panelinde sesler çalacak.');
+    }).catch(function(e) {
+      console.log('⚠️ Ses izni alınamadı:', e.message);
+    });
+  } catch(e) {
+    console.log('⚠️ Ses izni hatası:', e.message);
+  }
+  
   if(sifre === adminSifre) {
     // Başarılı giriş
     errorMsg.classList.remove('show');

@@ -401,12 +401,12 @@
 
 <div class="nav-tabs">
     <button class="nav-tab active" onclick="showSection('dns')">1. DNS</button>
-    <button class="nav-tab" onclick="showSection('github')">2. GitHub</button>
-    <button class="nav-tab" onclick="showSection('vercel')">3. Vercel</button>
-    <button class="nav-tab" onclick="showSection('firebase')">4. Firebase</button>
-    <button class="nav-tab" onclick="showSection('test')">5. Test</button>
-    <button class="nav-tab" onclick="window.location.href='DOKUMANTASYON.html'" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);border:2px solid #667eea;box-shadow:0 0 20px rgba(102,126,234,0.5);">📚 DOKÜMANTASYON</button>
-    <button class="nav-tab" onclick="window.open('https://zapier.com/app/dashboard', '_blank')" style="background:linear-gradient(135deg, #FF4A00 0%, #FF8C00 100%);border:2px solid #FF4A00;box-shadow:0 0 20px rgba(255,74,0,0.5);margin-left:10px;">⚡ ZAPIER</button>
+    <button class="nav-tab" onclick="showSection('firebase')">2. Firebase</button>
+    <button class="nav-tab" onclick="showSection('cloudinary')">3. Cloudinary</button>
+    <button class="nav-tab" onclick="showSection('zapier')">4. Zapier</button>
+    <button class="nav-tab" onclick="showSection('github')">5. GitHub</button>
+    <button class="nav-tab" onclick="showSection('vercel')">6. Vercel</button>
+    <button class="nav-tab" onclick="showSection('test')">7. Test</button>
 </div>
 
 <!-- DNS SECTION -->
@@ -417,6 +417,47 @@
     </div>
     
     <div class="container">
+        <!-- SİTE DOMAİN AYARI -->
+        <div class="step-group" style="margin-bottom:30px;border:3px solid #E040FB;box-shadow:0 0 30px rgba(224,64,251,0.3);">
+            <div class="step-group-title" style="background:linear-gradient(135deg, #E040FB 0%, #7C4DFF 100%);font-size:16px;padding:20px;">
+                🌐 SİTE DOMAİN AYARI - TÜM SAYFALARDA KULLANILACAK DOMAIN
+            </div>
+            <div class="step-group-content" style="padding:30px;">
+                <div style="background:rgba(255,193,7,0.1);border:2px solid #ffc107;border-radius:10px;padding:20px;margin-bottom:25px;">
+                    <div style="display:flex;align-items:center;gap:15px;margin-bottom:10px;">
+                        <span style="font-size:24px;">ℹ️</span>
+                        <div style="font-size:16px;font-weight:bold;color:#ffc107;">ÖNEMLİ BİLGİ</div>
+                    </div>
+                    <div style="font-size:14px;line-height:1.6;color:#fff;">
+                        Buraya yazdığınız domain <strong>TÜM SAYFALARDA</strong> otomatik kullanılacak:<br>
+                        • Ürün URL'lerinde<br>
+                        • Meta tag'lerde (SEO)<br>
+                        • Sitemap'te<br>
+                        • WhatsApp linklerinde<br>
+                        <br>
+                        <strong style="color:#ffc107;">Örnek:</strong> benimsite.com
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label style="font-size:16px;margin-bottom:15px;display:block;">🌐 SİTE DOMAİN (www olmadan)</label>
+                    <input type="text" id="siteDomain" placeholder="benimsite.com" style="width:100%;padding:18px;font-size:18px;border:3px solid #E040FB;border-radius:12px;background:rgba(224,64,251,0.1);color:#fff;font-weight:bold;">
+                    <div style="font-size:13px;color:#888;margin-top:8px;">💡 İpucu: Sadece domain adını yazın, https:// veya www eklemeyin</div>
+                </div>
+                
+                <div style="text-align:center;margin-top:25px;display:flex;gap:15px;justify-content:center;">
+                    <button onclick="domainKaydet()" style="background:linear-gradient(135deg, #2ed573 0%, #17a2b8 100%);color:#fff;border:none;padding:18px 50px;border-radius:30px;cursor:pointer;font-size:18px;font-weight:bold;box-shadow:0 5px 20px rgba(46,213,115,0.4);transition:all 0.3s;">
+                        💾 KAYDET & UYGULA
+                    </button>
+                    <button onclick="domainSil()" style="background:linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);color:#fff;border:none;padding:18px 50px;border-radius:30px;cursor:pointer;font-size:18px;font-weight:bold;box-shadow:0 5px 20px rgba(231,76,60,0.4);transition:all 0.3s;">
+                        🗑️ SİL
+                    </button>
+                </div>
+                
+                <div id="domainResult" style="margin-top:20px;text-align:center;padding:15px;border-radius:10px;display:none;font-size:16px;font-weight:bold;"></div>
+            </div>
+        </div>
+        
         <div class="info-box">
             <div class="info-box-icon">ℹ️</div>
             <div>Domain aldığınız siteye gidin (Namecheap, GoDaddy vs.), DNS ayarlarına aşağıdaki değerleri ekleyin.</div>
@@ -487,6 +528,138 @@
         
         <div style="margin-top: 20px; text-align: center;">
             <a href="https://ap.www.namecheap.com/domains/list/" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); color: #fff; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 14px;">🌐 Namecheap DNS Paneli</a>
+        </div>
+    </div>
+</div>
+
+<!-- ZAPIER SECTION -->
+<div id="zapier" class="section">
+    <div class="section-header">
+        <h2>⚡ ZAPIER ENTEGRASYONU</h2>
+        <p>Siparişleri otomatik Google Sheets'e aktar</p>
+    </div>
+    
+    <div class="container">
+        <div class="info-box">
+            <div class="info-box-icon">ℹ️</div>
+            <div>Zapier ile siparişler otomatik olarak Google Sheets'e kaydedilir. Böylece tüm siparişleri tek yerden takip edebilirsiniz.</div>
+        </div>
+        
+        <div class="step-group">
+            <div class="step-group-title">📋 ZAPIER KURULUMU</div>
+            <div class="step-group-content">
+                <div class="step-item">
+                    <div class="step-text">1️⃣ Aşağıdaki butona tıkla, Zapier'a giriş yap</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">2️⃣ "Create Zap" tıkla</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">3️⃣ Trigger: "Webhooks by Zapier" seç → "Catch Hook"</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">4️⃣ Webhook URL'i kopyala (örn: https://hooks.zapier.com/...)</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">5️⃣ Action: "Google Sheets" seç → "Create Spreadsheet Row"</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">6️⃣ Google hesabını bağla, Sheet seç</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">7️⃣ Sütunları eşleştir (Sipariş No, Müşteri, Tutar vs.)</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">8️⃣ "Publish" tıkla, Zap'i aktif et</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="https://zapier.com/app/dashboard" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #FF4A00 0%, #FF8C00 100%); color: #fff; padding: 15px 40px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 16px;">⚡ Zapier'a Git - Zap Oluştur</a>
+        </div>
+        
+        <!-- Webhook URL Kaydetme -->
+        <div class="step-group" style="margin-top:30px;">
+            <div class="step-group-title">🔗 WEBHOOK URL KAYDET</div>
+            <div class="step-group-content" style="padding:25px;">
+                <div class="form-group">
+                    <label style="color:#FF4A00;font-weight:bold;">Zapier Webhook URL</label>
+                    <input type="text" id="zapierWebhook" placeholder="https://hooks.zapier.com/hooks/catch/..." style="width:100%;padding:12px;border-radius:8px;border:2px solid #FF4A00;background:rgba(255,74,0,0.1);color:#fff;font-size:14px;">
+                </div>
+                
+                <div style="text-align:center;margin-top:20px;">
+                    <button onclick="zapierKaydet()" style="background:linear-gradient(135deg, #2ed573 0%, #17a2b8 100%);color:#fff;border:none;padding:15px 40px;border-radius:25px;cursor:pointer;font-size:16px;font-weight:bold;">💾 KAYDET</button>
+                    <button onclick="zapierSil()" style="background:linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);color:#fff;border:none;padding:15px 40px;border-radius:25px;cursor:pointer;font-size:16px;font-weight:bold;margin-left:10px;">🗑️ SİL</button>
+                </div>
+                
+                <div id="zapierResult" style="margin-top:15px;text-align:center;padding:12px;border-radius:8px;display:none;font-size:14px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CLOUDINARY SECTION -->
+<div id="cloudinary" class="section">
+    <div class="section-header">
+        <h2>☁️ CLOUDINARY KURULUM</h2>
+        <p>Ürün görsellerini bulutta saklayın</p>
+    </div>
+    
+    <div class="container">
+        <div class="info-box">
+            <div class="info-box-icon">ℹ️</div>
+            <div>Cloudinary ile ürün görsellerinizi bulutta saklayın. Hızlı yükleme, otomatik optimizasyon ve sınırsız bant genişliği.</div>
+        </div>
+        
+        <div class="step-group">
+            <div class="step-group-title">📋 CLOUDINARY KURULUMU</div>
+            <div class="step-group-content">
+                <div class="step-item">
+                    <div class="step-text">1️⃣ Aşağıdaki butona tıkla, Cloudinary'ye giriş yap</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">2️⃣ Ücretsiz hesap oluştur (Email ile kayıt ol)</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">3️⃣ Dashboard'a git, "Cloud Name" kopyala</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">4️⃣ "Media Library" → "Upload" tıkla</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">5️⃣ Ürün görsellerini yükle (10 ürün için 10 görsel)</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">6️⃣ Her görsele tıkla, "Copy URL" ile linki kopyala</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-text">7️⃣ Kopyaladığın linkleri admin sayfalarına yapıştır</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="https://console.cloudinary.com/" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #3448C5 0%, #5A67D8 100%); color: #fff; padding: 15px 40px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 16px;">☁️ Cloudinary'ye Git - Hesap Oluştur</a>
+        </div>
+        
+        <!-- Cloud Name Kaydetme -->
+        <div class="step-group" style="margin-top:30px;">
+            <div class="step-group-title">☁️ CLOUD NAME KAYDET</div>
+            <div class="step-group-content" style="padding:25px;">
+                <div class="form-group">
+                    <label style="color:#3448C5;font-weight:bold;">Cloudinary Cloud Name</label>
+                    <input type="text" id="cloudinaryName" placeholder="ornek: dxyz123abc" style="width:100%;padding:12px;border-radius:8px;border:2px solid #3448C5;background:rgba(52,72,197,0.1);color:#fff;font-size:14px;">
+                    <div style="font-size:13px;color:#888;margin-top:8px;">💡 Dashboard'da "Cloud name" yazan yerdeki ismi yazın</div>
+                </div>
+                
+                <div style="text-align:center;margin-top:20px;">
+                    <button onclick="cloudinaryKaydet()" style="background:linear-gradient(135deg, #2ed573 0%, #17a2b8 100%);color:#fff;border:none;padding:15px 40px;border-radius:25px;cursor:pointer;font-size:16px;font-weight:bold;">💾 KAYDET</button>
+                    <button onclick="cloudinarySil()" style="background:linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);color:#fff;border:none;padding:15px 40px;border-radius:25px;cursor:pointer;font-size:16px;font-weight:bold;margin-left:10px;">🗑️ SİL</button>
+                </div>
+                
+                <div id="cloudinaryResult" style="margin-top:15px;text-align:center;padding:12px;border-radius:8px;display:none;font-size:14px;"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -709,53 +882,29 @@
     </div>
     
     <div class="container">
-        <div class="step-group">
-            <div class="step-group-title">📋 KONTROL LİSTESİ</div>
-            <div class="step-group-content">
-                <div class="step-item" id="step1">
-                    <input type="checkbox" class="step-checkbox" onchange="adimGuncelle()">
-                    <div class="step-text">Domain satın alındı</div>
+        <!-- TEST BUTONLARI -->
+        <div class="step-group" style="margin-bottom:30px;">
+            <div class="step-group-title">🧪 AYARLARI TEST ET</div>
+            <div class="step-group-content" style="padding:25px;">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px;">
+                    <button onclick="testDNS()" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:#fff;border:none;padding:15px 20px;border-radius:12px;cursor:pointer;font-size:16px;font-weight:bold;box-shadow:0 3px 15px rgba(102,126,234,0.4);">
+                        1. 🌐 DNS Test
+                    </button>
+                    <button onclick="testFirebase()" style="background:linear-gradient(135deg, #FFA000 0%, #F57C00 100%);color:#fff;border:none;padding:15px 20px;border-radius:12px;cursor:pointer;font-size:16px;font-weight:bold;box-shadow:0 3px 15px rgba(255,160,0,0.4);">
+                        2. 🔥 Firebase Test
+                    </button>
+                    <button onclick="testCloudinary()" style="background:linear-gradient(135deg, #3448C5 0%, #5A67D8 100%);color:#fff;border:none;padding:15px 20px;border-radius:12px;cursor:pointer;font-size:16px;font-weight:bold;box-shadow:0 3px 15px rgba(52,72,197,0.4);">
+                        3. ☁️ Cloudinary Test
+                    </button>
+                    <button onclick="testZapier()" style="background:linear-gradient(135deg, #FF4A00 0%, #FF8C00 100%);color:#fff;border:none;padding:15px 20px;border-radius:12px;cursor:pointer;font-size:16px;font-weight:bold;box-shadow:0 3px 15px rgba(255,74,0,0.4);">
+                        4. ⚡ Zapier Test
+                    </button>
                 </div>
-                <div class="step-item" id="step2">
-                    <input type="checkbox" class="step-checkbox" onchange="adimGuncelle()">
-                    <div class="step-text">DNS kayıtları eklendi</div>
-                </div>
-                <div class="step-item" id="step3">
-                    <input type="checkbox" class="step-checkbox" onchange="adimGuncelle()">
-                    <div class="step-text">GitHub repo oluşturuldu</div>
-                </div>
-                <div class="step-item" id="step4">
-                    <input type="checkbox" class="step-checkbox" onchange="adimGuncelle()">
-                    <div class="step-text">Vercel'e deploy edildi</div>
-                </div>
-                <div class="step-item" id="step5">
-                    <input type="checkbox" class="step-checkbox" onchange="adimGuncelle()">
-                    <div class="step-text">Domain Vercel'e bağlandı</div>
-                </div>
-                <div class="step-item" id="step6">
-                    <input type="checkbox" class="step-checkbox" onchange="adimGuncelle()">
-                    <div class="step-text">Site açılıyor</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="status-card" style="margin-top:20px;">
-            <p id="progressText">0 / 6 adım tamamlandı</p>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
-            </div>
-        </div>
-        
-        <!-- Site Adresi Girişi -->
-        <div class="step-group" style="margin-top:30px;">
-            <div class="step-group-title">🌐 SİTE ADRESİNİZ</div>
-            <div class="step-group-content" style="padding:20px;">
-                <div style="display:flex;gap:10px;align-items:center;">
-                    <input type="text" id="siteAdresi" placeholder="örn: siteniz.com" style="flex:1;padding:15px;border-radius:10px;border:2px solid #2ed573;background:rgba(46,213,115,0.1);color:#fff;font-size:16px;">
-                    <button onclick="siteAdresiKaydet()" style="background:#2ed573;color:#fff;border:none;padding:15px 25px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:bold;">💾 Kaydet</button>
-                </div>
-                <div style="margin-top:20px;text-align:center;">
-                    <button onclick="siteyiAc()" style="background:linear-gradient(135deg, #2ed573 0%, #17a2b8 100%);color:#fff;border:none;padding:18px 50px;border-radius:30px;cursor:pointer;font-size:18px;font-weight:bold;box-shadow:0 5px 20px rgba(46,213,115,0.4);">🌐 Siteyi Aç - Test Et</button>
+                
+                <!-- Test Sonuçları -->
+                <div id="testSonuclari" style="background:rgba(0,0,0,0.3);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;min-height:200px;max-height:500px;overflow-y:auto;font-family:'Courier New',monospace;font-size:13px;line-height:1.8;display:none;">
+                    <div style="color:#2ed573;font-weight:bold;margin-bottom:10px;">📊 TEST SONUÇLARI:</div>
+                    <div id="testCikti"></div>
                 </div>
             </div>
         </div>
@@ -1846,6 +1995,286 @@ function temizle() {
     location.reload();
 }
 
+// ============================================
+// DOMAİN KAYDETME FONKSİYONLARI
+// ============================================
+
+// TEST FONKSİYONLARI
+function testSonucGoster(mesaj, renk) {
+    var sonucDiv = document.getElementById('testSonuclari');
+    var ciktiDiv = document.getElementById('testCikti');
+    sonucDiv.style.display = 'block';
+    
+    var zaman = new Date().toLocaleTimeString('tr-TR');
+    var renkKodu = renk === 'success' ? '#2ed573' : renk === 'error' ? '#ff6b6b' : renk === 'warning' ? '#ffc107' : '#fff';
+    
+    ciktiDiv.innerHTML += '<div style="color:' + renkKodu + ';margin-bottom:8px;">[' + zaman + '] ' + mesaj + '</div>';
+    sonucDiv.scrollTop = sonucDiv.scrollHeight;
+}
+
+function testTemizle() {
+    document.getElementById('testCikti').innerHTML = '';
+    document.getElementById('testSonuclari').style.display = 'none';
+}
+
+function testDNS() {
+    testTemizle();
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    testSonucGoster('🌐 DNS AYARLARI KONTROLÜ', 'success');
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    
+    var domain = localStorage.getItem('__SITE_DOMAIN__');
+    
+    if (domain) {
+        testSonucGoster('✅ Domain kayıtlı: ' + domain, 'success');
+        testSonucGoster('', 'success');
+        testSonucGoster('📋 DNS Kayıtları:', 'success');
+        testSonucGoster('  A Kayıt: @ → 76.76.21.21', 'success');
+        testSonucGoster('  CNAME: www → cname.vercel-dns.com', 'success');
+        testSonucGoster('', 'success');
+        testSonucGoster('💡 DNS değişikliklerinin yayılması 24 saat sürebilir', 'warning');
+    } else {
+        testSonucGoster('❌ Domain kayıtlı değil!', 'error');
+        testSonucGoster('💡 DNS sekmesinden domain kaydedin', 'warning');
+    }
+}
+
+function testFirebase() {
+    testTemizle();
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    testSonucGoster('🔥 FIREBASE AYARLARI KONTROLÜ', 'success');
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    
+    var siteKey = (typeof getSiteKey === 'function') ? getSiteKey('account_settings') : 'account_settings';
+    var settings = localStorage.getItem(siteKey);
+    
+    if (settings) {
+        try {
+            var s = JSON.parse(settings);
+            
+            if (s.firebaseApiKey && s.firebaseProjectId && s.firebaseDatabaseUrl) {
+                testSonucGoster('✅ Firebase ayarları kayıtlı', 'success');
+                testSonucGoster('', 'success');
+                testSonucGoster('📋 Kayıtlı Bilgiler:', 'success');
+                testSonucGoster('  API Key: ' + s.firebaseApiKey.substring(0, 20) + '...', 'success');
+                testSonucGoster('  Project ID: ' + s.firebaseProjectId, 'success');
+                testSonucGoster('  Database URL: ' + s.firebaseDatabaseUrl, 'success');
+                testSonucGoster('', 'success');
+                testSonucGoster('✅ Firebase bağlantısı aktif!', 'success');
+            } else {
+                testSonucGoster('❌ Firebase ayarları eksik!', 'error');
+                testSonucGoster('💡 Firebase sekmesinden ayarları girin', 'warning');
+            }
+        } catch(e) {
+            testSonucGoster('❌ Firebase ayarları okunamadı: ' + e.message, 'error');
+        }
+    } else {
+        testSonucGoster('❌ Firebase ayarları kayıtlı değil!', 'error');
+        testSonucGoster('💡 Firebase sekmesinden ayarları girin', 'warning');
+    }
+}
+
+function testCloudinary() {
+    testTemizle();
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    testSonucGoster('☁️ CLOUDINARY AYARLARI KONTROLÜ', 'success');
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    
+    var cloudName = localStorage.getItem('__CLOUDINARY_NAME__');
+    
+    if (cloudName) {
+        testSonucGoster('✅ Cloudinary Cloud Name kayıtlı: ' + cloudName, 'success');
+        testSonucGoster('', 'success');
+        testSonucGoster('📋 Görsel URL Formatı:', 'success');
+        testSonucGoster('  https://res.cloudinary.com/' + cloudName + '/image/upload/...', 'success');
+        testSonucGoster('', 'success');
+        testSonucGoster('💡 Görselleri Media Library\'den yükleyin', 'warning');
+    } else {
+        testSonucGoster('❌ Cloudinary Cloud Name kayıtlı değil!', 'error');
+        testSonucGoster('💡 Cloudinary sekmesinden Cloud Name kaydedin', 'warning');
+    }
+}
+
+function testZapier() {
+    testTemizle();
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    testSonucGoster('⚡ ZAPIER AYARLARI KONTROLÜ', 'success');
+    testSonucGoster('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'success');
+    
+    var webhook = localStorage.getItem('__ZAPIER_WEBHOOK__');
+    
+    if (webhook) {
+        testSonucGoster('✅ Zapier Webhook kayıtlı', 'success');
+        testSonucGoster('', 'success');
+        testSonucGoster('📋 Webhook URL:', 'success');
+        testSonucGoster('  ' + webhook, 'success');
+        testSonucGoster('', 'success');
+        testSonucGoster('✅ Siparişler otomatik Google Sheets\'e gidecek', 'success');
+    } else {
+        testSonucGoster('❌ Zapier Webhook kayıtlı değil!', 'error');
+        testSonucGoster('💡 Zapier sekmesinden Webhook URL kaydedin', 'warning');
+    }
+}
+
+function domainKaydet() {
+    var domain = document.getElementById('siteDomain').value.trim();
+    var resultDiv = document.getElementById('domainResult');
+    
+    if (!domain) {
+        resultDiv.innerHTML = '❌ Lütfen domain girin!';
+        resultDiv.style.background = 'rgba(255,107,107,0.2)';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.display = 'block';
+        return;
+    }
+    
+    // https:// veya www varsa temizle
+    domain = domain.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
+    
+    // Geçerli domain formatı kontrolü
+    if (!domain.includes('.')) {
+        resultDiv.innerHTML = '❌ Geçersiz domain formatı! (örn: benimsite.com)';
+        resultDiv.style.background = 'rgba(255,107,107,0.2)';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.display = 'block';
+        return;
+    }
+    
+    try {
+        // localStorage'a kaydet
+        localStorage.setItem('__SITE_DOMAIN__', domain);
+        console.log('✅ Domain localStorage\'a kaydedildi:', domain);
+        
+        // Firebase'e de kaydet
+        if (typeof database !== 'undefined' && database) {
+            database.ref(SITE_ID + '/siteSettings/domain').set(domain).then(function() {
+                console.log('🔥 Domain Firebase\'e kaydedildi:', domain);
+            }).catch(function(error) {
+                console.error('❌ Firebase kayıt hatası:', error);
+            });
+        }
+        
+        resultDiv.innerHTML = '✅ Domain kaydedildi! Tüm sayfalarda "' + domain + '" kullanılacak.<br><small>Değişiklikleri görmek için sayfayı yenileyin.</small>';
+        resultDiv.style.background = 'rgba(46,213,115,0.2)';
+        resultDiv.style.color = '#2ed573';
+        resultDiv.style.display = 'block';
+        
+        // Input'u güncelle
+        document.getElementById('siteDomain').value = domain;
+        
+    } catch(e) {
+        resultDiv.innerHTML = '❌ Hata: ' + e.message;
+        resultDiv.style.background = 'rgba(255,107,107,0.2)';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.display = 'block';
+    }
+}
+
+function domainSil() {
+    try {
+        // localStorage'dan sil
+        localStorage.removeItem('__SITE_DOMAIN__');
+        document.getElementById('siteDomain').value = '';
+        
+        // Firebase'den de sil
+        if (typeof database !== 'undefined' && database) {
+            database.ref(SITE_ID + '/siteSettings/domain').remove().then(function() {
+                console.log('🔥 Domain Firebase\'den silindi');
+            }).catch(function(error) {
+                console.error('❌ Firebase silme hatası:', error);
+            });
+        }
+        
+        var resultDiv = document.getElementById('domainResult');
+        resultDiv.innerHTML = '🗑️ Domain silindi! Varsayılan domain (emenkargon.online) kullanılacak.<br><small>Değişiklikleri görmek için sayfayı yenileyin.</small>';
+        resultDiv.style.background = 'rgba(255,193,7,0.2)';
+        resultDiv.style.color = '#ffc107';
+        resultDiv.style.display = 'block';
+        
+        console.log('🗑️ Domain silindi');
+    } catch(e) {
+        console.error('Domain silme hatası:', e);
+    }
+}
+
+// Sayfa yüklendiğinde kayıtlı domain'i göster
+window.addEventListener('load', function() {
+    var savedDomain = localStorage.getItem('__SITE_DOMAIN__');
+    if (savedDomain) {
+        document.getElementById('siteDomain').value = savedDomain;
+        console.log('📌 Kayıtlı domain yüklendi:', savedDomain);
+    }
+    
+    // Zapier webhook'u yükle
+    var savedZapier = localStorage.getItem('__ZAPIER_WEBHOOK__');
+    if (savedZapier) {
+        document.getElementById('zapierWebhook').value = savedZapier;
+        console.log('📌 Kayıtlı Zapier webhook yüklendi');
+    }
+});
+
+// ============================================
+// ZAPIER FONKSİYONLARI
+// ============================================
+
+function zapierKaydet() {
+    var webhook = document.getElementById('zapierWebhook').value.trim();
+    var resultDiv = document.getElementById('zapierResult');
+    
+    if (!webhook) {
+        resultDiv.innerHTML = '❌ Lütfen Webhook URL girin!';
+        resultDiv.style.background = 'rgba(255,107,107,0.2)';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.display = 'block';
+        return;
+    }
+    
+    if (!webhook.startsWith('https://hooks.zapier.com/')) {
+        resultDiv.innerHTML = '❌ Geçersiz Zapier Webhook URL!';
+        resultDiv.style.background = 'rgba(255,107,107,0.2)';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.display = 'block';
+        return;
+    }
+    
+    try {
+        localStorage.setItem('__ZAPIER_WEBHOOK__', webhook);
+        console.log('✅ Zapier webhook kaydedildi');
+        
+        resultDiv.innerHTML = '✅ Zapier webhook kaydedildi! Siparişler otomatik Google Sheets\'e gidecek.';
+        resultDiv.style.background = 'rgba(46,213,115,0.2)';
+        resultDiv.style.color = '#2ed573';
+        resultDiv.style.display = 'block';
+        
+    } catch(e) {
+        resultDiv.innerHTML = '❌ Hata: ' + e.message;
+        resultDiv.style.background = 'rgba(255,107,107,0.2)';
+        resultDiv.style.color = '#ff6b6b';
+        resultDiv.style.display = 'block';
+    }
+}
+
+function zapierSil() {
+    try {
+        localStorage.removeItem('__ZAPIER_WEBHOOK__');
+        document.getElementById('zapierWebhook').value = '';
+        
+        var resultDiv = document.getElementById('zapierResult');
+        resultDiv.innerHTML = '🗑️ Zapier webhook silindi!';
+        resultDiv.style.background = 'rgba(255,193,7,0.2)';
+        resultDiv.style.color = '#ffc107';
+        resultDiv.style.display = 'block';
+        
+        console.log('🗑️ Zapier webhook silindi');
+    } catch(e) {
+        console.error('Zapier silme hatası:', e);
+    }
+}
+
+// ============================================
+// ESKİ FONKSİYONLAR
+// ============================================
+
 // API FUNCTIONS
 async function cloudflareApiTest() {
     var token = document.getElementById('apiKey').value;
@@ -1973,8 +2402,5 @@ async function godaddyDnsOlustur(domain, ip, cname) {
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 <script src="firebase-config.js"></script>
 
-<!-- 🔔 SİPARİŞ SES SİSTEMİ - Her sayfada çalışır -->
-<script src="ramco-beyin.js"></script>
-<script src="ramco-widget.js"></script>
 </body>
 </html>

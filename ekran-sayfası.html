@@ -900,6 +900,20 @@ window.saveName = function() {
 
 // Başla butonu
 window.basla = function() {
+  // 🔊 SES İZNİ AL - Başla butonuna tıklandı, ana sayfada sesler çalabilsin
+  try {
+    var sessizSes = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
+    sessizSes.volume = 0.01;
+    sessizSes.play().then(function() {
+      localStorage.setItem('sesIzniVerildi', 'true');
+      console.log('✅ Ses izni verildi! Ana sayfada sesler çalacak.');
+    }).catch(function(e) {
+      console.log('⚠️ Ses izni alınamadı:', e.message);
+    });
+  } catch(e) {
+    console.log('⚠️ Ses izni hatası:', e.message);
+  }
+  
   if(soundEnabled) {
     playConfettiSound();
   }

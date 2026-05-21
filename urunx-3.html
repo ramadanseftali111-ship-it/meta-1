@@ -880,6 +880,42 @@ setTimeout(function() {
 
 <script src="site-config.js"></script>
 <script>
+// 🌐 DOMAIN OTOMATİK DEĞİŞTİRME SİSTEMİ
+(function() {
+    var eskiDomain = 'emenkargon.online';
+    var yeniDomain = localStorage.getItem('__SITE_DOMAIN__') || eskiDomain;
+    
+    console.log('🌐 Domain Sistemi Aktif - Yeni Domain:', yeniDomain);
+    
+    // Title değiştirme fonksiyonu
+    function titleDegistir() {
+        if (document.title && document.title.includes(eskiDomain)) {
+            document.title = document.title.replace(new RegExp(eskiDomain, 'gi'), yeniDomain);
+            console.log('✅ Title güncellendi:', document.title);
+        }
+    }
+    
+    // Hemen çalıştır
+    titleDegistir();
+    
+    // Her 300ms'de kontrol et
+    setInterval(titleDegistir, 300);
+    
+    // document.title değiştirildiğinde yakala
+    var originalTitle = document.title;
+    Object.defineProperty(document, 'title', {
+        set: function(newTitle) {
+            if (newTitle && newTitle.includes(eskiDomain)) {
+                newTitle = newTitle.replace(new RegExp(eskiDomain, 'gi'), yeniDomain);
+            }
+            document.getElementsByTagName('title')[0].innerHTML = newTitle;
+        },
+        get: function() {
+            return document.getElementsByTagName('title')[0].innerHTML;
+        }
+    });
+})();
+
 
 const ilceler = {
     adana: ['Aladağ', 'Ceyhan', 'Çukurova', 'Feke', 'İmamoğlu', 'Karaisalı', 'Karataş', 'Kozan', 'Pozantı', 'Saimbeyli', 'Sarıçam', 'Seyhan', 'Tufanbeyli', 'Yumurtalık', 'Yüreğir'],

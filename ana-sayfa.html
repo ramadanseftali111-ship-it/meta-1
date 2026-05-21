@@ -13,10 +13,14 @@ body{-ms-overflow-style:none;scrollbar-width:none}
 /* Tüm scrollbar'ları gizle */
 *::-webkit-scrollbar{display:none}
 *{scrollbar-width:none;-ms-overflow-style:none}
+@keyframes slideIn {
+  from { transform: translateX(400px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
 #topBar{position:fixed;top:-160px;left:0;right:0;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);padding:10px 15px;border-bottom:none;z-index:998;transition:top 0.3s ease}
 #topBar.acik{top:0}
-#drawerButtons{display:grid;grid-template-columns:repeat(16,1fr);gap:5px;width:100%}
-.drawerBtn{color:#fff;border:none;padding:8px 4px;border-radius:8px;font-weight:700;cursor:pointer;font-size:11px;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px;transition:all 0.2s ease;box-shadow:0 3px 10px rgba(0,0,0,0.3);white-space:nowrap;height:40px}
+#drawerButtons{display:flex;gap:4px;width:100%;justify-content:space-between;flex-wrap:wrap}
+.drawerBtn{color:#fff;border:none;padding:10px 8px;border-radius:8px;font-weight:700;cursor:pointer;font-size:11px;text-align:center;display:flex;align-items:center;justify-content:center;gap:3px;transition:all 0.2s ease;box-shadow:0 3px 10px rgba(0,0,0,0.3);white-space:nowrap;height:44px;flex:1;min-width:80px}
 .drawerBtn:hover{transform:translateY(-2px);box-shadow:0 5px 12px rgba(0,0,0,0.4)}
 .ledIsik{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:8px}
 .ledKapali{background:#555;box-shadow:none}
@@ -31,10 +35,10 @@ body{-ms-overflow-style:none;scrollbar-width:none}
 #okBtn{position:fixed;top:0;right:20px;z-index:999;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:#fff;border:none;padding:8px 20px;border-radius:0 0 10px 10px;cursor:pointer;font-size:16px;font-weight:bold;transition:top 0.3s ease;box-shadow:0 3px 10px rgba(0,0,0,0.3)}
 #okBtn.acik{top:125px}
 #okBtn:hover{background:linear-gradient(135deg,#16213e 0%,#1a1a2e 100%)}
-#adminBtn{position:fixed;top:200px;right:0;z-index:999;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:#fff;border:none;padding:8px 20px;border-radius:10px 0 0 10px;cursor:pointer;font-size:14px;font-weight:bold;transition:top 0.3s ease;box-shadow:0 3px 10px rgba(0,0,0,0.3)}
-#adminBtn.acik{top:210px}
+#adminBtn{position:fixed;top:310px;right:0;z-index:999;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:#fff;border:none;padding:8px 20px;border-radius:10px 0 0 10px;cursor:pointer;font-size:14px;font-weight:bold;transition:top 0.3s ease;box-shadow:0 3px 10px rgba(0,0,0,0.3)}
+#adminBtn.acik{top:320px}
 #adminBtn:hover{background:linear-gradient(135deg,#16213e 0%,#1a1a2e 100%)}
-#urlBtn{position:fixed;top:160px;right:0;z-index:999;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:#fff;border:none;padding:8px 20px;border-radius:10px 0 0 10px;cursor:pointer;font-size:14px;font-weight:bold;box-shadow:0 3px 10px rgba(0,0,0,0.3)}
+#urlBtn{position:fixed;top:270px;right:0;z-index:999;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);color:#fff;border:none;padding:8px 20px;border-radius:10px 0 0 10px;cursor:pointer;font-size:14px;font-weight:bold;box-shadow:0 3px 10px rgba(0,0,0,0.3)}
 #urlBtn:hover{background:linear-gradient(135deg,#16213e 0%,#1a1a2e 100%)}
 #urlDrawer{position:fixed;left:-320px;top:125px;width:300px;height:calc(100vh - 125px);background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);z-index:997;transition:left 0.3s ease;box-shadow:3px 0 15px rgba(0,0,0,0.5);overflow:hidden;display:flex;flex-direction:column}
 #urlDrawer.acik{left:0}
@@ -55,18 +59,9 @@ body{-ms-overflow-style:none;scrollbar-width:none}
 <button class="drawerBtn" style="background:#000" onclick="guvenliGit('tiktok-pixel.html')">TikTok Pixel</button>
 <button class="drawerBtn" style="background:#0095F6" onclick="guvenliGit('meta-pixel.html')">Meta Pixel</button>
 <button class="drawerBtn" style="background:#9C27B0" onclick="guvenliGit('domain-bagla.html')">Domain</button>
-<button class="drawerBtn" style="background:#96bf3d" onclick="guvenliGit('shopify-ayarlar.html')">Shopify</button>
 <button class="drawerBtn" style="background:#FFC107;color:#000" onclick="guvenliGit('muhasebeci.html')">Muhasebe</button>
-<button class="drawerBtn" style="background:#1B5E20" onclick="guvenliGit('gelen-fatura.html')">Gelen Fatura</button>
-<button class="drawerBtn" style="background:#00008B" onclick="guvenliGit('fatura-gonder.html')">Fatura Gönder</button>
-<button class="drawerBtn" style="background:#FF8C00" onclick="guvenliGit('kargo-gonder.html')">Kargo</button>
 <button class="drawerBtn" style="background:#1B5E20" onclick="guvenliGit('siparis-takibi.html')">Siparişler</button>
-<button class="drawerBtn" style="background:#2C3E50" onclick="guvenliGit('otomasyon.html')">Otomasyon</button>
-<button class="drawerBtn" style="background:#e94560" onclick="guvenliGit('ramco.html')">🤖 AI</button>
-<!-- POLİTİKA BUTONU KALDIRILDI -->
-<button class="drawerBtn" style="background:#667eea" onclick="guvenliGit('dokumantasyon.html')">📚 Rehber</button>
 <button class="drawerBtn" style="background:#28a745" onclick="guvenliGit('ses-yoneticisi.html')">🔊 Ses</button>
-<button class="drawerBtn" style="background:#17a2b8" onclick="guvenliGit('gorsel-yukleyici-grid.html')">🖼️ Görsel</button>
 <button class="drawerBtn" style="background:#dc3545" onclick="sifreModalAc()">🔐 Şifre</button>
 </div>
 <!-- SAYFA KONTROL BÖLÜMÜ -->
@@ -763,6 +758,7 @@ window.addEventListener('load', haftalikGrafigiBagla);
 <span id="notifCount" style="background:#dc3545;color:#fff;padding:2px 8px;border-radius:10px;font-size:12px">0</span>
 </div>
 <button onclick="toggleSound()" id="soundBtn" style="background:none;border:1px solid #444;color:#fff;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:12px">🔊 Ses Açık</button>
+<button onclick="if(typeof siparisSesCal === 'function') { siparisSesCal(); } else { alert('siparisSesCal fonksiyonu bulunamadı!'); }" style="display:none">🔔 Test Sesi</button>
 </div>
 <div id="notifications" style="max-height:200px;overflow-y:auto">
 <div style="padding:10px;background:rgba(255,255,255,0.05);border-radius:8px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
@@ -889,6 +885,9 @@ setInterval(function() {
 <script>
 // Firebase hazır olunca çalışacak ana fonksiyon
 function anaSayfaFirebaseBaslat() {
+  // anaSayfaBaslatildi flag'i ile kontrol ediliyor (dışarıda tanımlı)
+  console.log('🚀 anaSayfaFirebaseBaslat çalışıyor');
+  
   var simdi = new Date();
   var bugun = simdi.getDate().toString().padStart(2,'0') + '.' + (simdi.getMonth()+1).toString().padStart(2,'0') + '.' + simdi.getFullYear();
   
@@ -1005,19 +1004,15 @@ function anaSayfaFirebaseBaslat() {
     var todayRevenueEl = document.getElementById('todayRevenue');
     var totalRevenueEl = document.getElementById('totalRevenue');
     var todayVisitorsEl = document.getElementById('todayVisitors');
-    var totalVisitorsEl = document.getElementById('totalVisitors');
+    // totalVisitors burada güncellenmeyecek, aşağıda benzersiz ziyaretçi sayısı ile güncellenecek
     
     if(todayOrdersEl) todayOrdersEl.textContent = bugunSiparis;
     if(totalOrdersEl) totalOrdersEl.textContent = toplamSiparis;
     if(todayRevenueEl) todayRevenueEl.textContent = bugunCiro.toLocaleString('tr-TR') + '₺';
     if(totalRevenueEl) totalRevenueEl.textContent = toplamCiro.toLocaleString('tr-TR') + '₺';
     if(todayVisitorsEl) todayVisitorsEl.textContent = bugunZiyaretci;
-    if(totalVisitorsEl) totalVisitorsEl.textContent = Math.max(toplamZiyaretci, bugunZiyaretci);
-    
-    // Dönüşüm oranı
-    var donusumOrani = bugunZiyaretci > 0 ? ((bugunSiparis / bugunZiyaretci) * 100).toFixed(1) : 0;
-    var conversionEl = document.getElementById('conversionRate');
-    if(conversionEl) conversionEl.textContent = donusumOrani + '%';
+    // totalVisitors satırı kaldırıldı - aşağıda benzersiz sayım ile güncellenecek
+    // conversionRate satırı kaldırıldı - hesaplaDonusumOrani() fonksiyonu ile güncellenecek
     
     // Ortalama sipariş
     var ortSiparis = toplamSiparis > 0 ? Math.round(toplamCiro / toplamSiparis) : 0;
@@ -1408,15 +1403,162 @@ function anaSayfaFirebaseBaslat() {
   
   // YENİ SİPARİŞ DİNLEME - SES ÇALMA
   var sonSiparisTimestamp = Date.now();
-  database.ref(SITE_ID + '/siparisler').on('child_added', function(snapshot) {
-    var siparis = snapshot.val();
-    if (siparis && siparis.timestamp && siparis.timestamp > sonSiparisTimestamp) {
-      // Yeni sipariş geldi - ses çal
-      if (typeof siparisSesCal === 'function') {
-        siparisSesCal();
-      }
-      console.log('🔔 Yeni sipariş geldi!', siparis.siparisNo, siparis.musteri);
+  var ilkYukleme = true;
+  console.log('⏰ Sipariş dinleme başlatıldı. Başlangıç timestamp:', sonSiparisTimestamp, new Date(sonSiparisTimestamp).toLocaleString('tr-TR'));
+  
+  // Ses çalma fonksiyonu - Ses yöneticisinden sipariş sesini al
+  window.siparisSesCal = function() {
+    // Aynı anda birden fazla ses çalmasını engelle
+    if (window.sesCaliyor) {
+      console.log('⏭️ Ses zaten çalıyor, atlanıyor');
+      return;
     }
+    
+    if (!window.sesAcik) {
+      console.log('🔇 Ses kapalı, çalmıyor');
+      return;
+    }
+    
+    // Ses yöneticisinden sipariş sesini al - IndexedDB ve localStorage'dan
+    var sesKey = (typeof getSiteKey === 'function') ? getSiteKey('ramco_sesler') : 'ramco_sesler';
+    var dbName = (typeof getSiteKey === 'function') ? getSiteKey('ramco_ses_db') : 'ramco_ses_db';
+    
+    console.log('🔍 Sipariş sesi aranıyor... DB:', dbName, 'Key:', sesKey);
+    
+    // Önce IndexedDB'den dene - VERSİYON 2 KULLAN
+    var request = indexedDB.open(dbName, 2);
+    
+    request.onsuccess = function(e) {
+      var db = e.target.result;
+      if (db.objectStoreNames.contains('sesler')) {
+        var transaction = db.transaction(['sesler'], 'readonly');
+        var store = transaction.objectStore('sesler');
+        var getRequest = store.get('siparis');
+        
+        getRequest.onsuccess = function() {
+          var sesData = getRequest.result;
+          if (sesData && sesData.data) {
+            console.log('✅ Sipariş sesi IndexedDB\'den yüklendi:', sesData.isim);
+            sesCal(sesData.data, true);
+          } else {
+            console.log('⚠️ IndexedDB\'de sipariş sesi yok, localStorage deneniyor...');
+            // IndexedDB'de yoksa localStorage'dan dene
+            localStorageDanSesCal();
+          }
+        };
+        
+        getRequest.onerror = function() {
+          console.log('⚠️ IndexedDB okuma hatası, localStorage deneniyor...');
+          localStorageDanSesCal();
+        };
+      } else {
+        console.log('⚠️ IndexedDB\'de sesler store\'u yok, localStorage deneniyor...');
+        localStorageDanSesCal();
+      }
+    };
+    
+    request.onerror = function() {
+      console.log('⚠️ IndexedDB açılamadı, localStorage deneniyor...');
+      localStorageDanSesCal();
+    };
+    
+    // localStorage'dan ses çalma fonksiyonu
+    function localStorageDanSesCal() {
+      var kayitliSesler = localStorage.getItem(sesKey);
+      var siparisSesDosyasi = null;
+      
+      if (kayitliSesler) {
+        try {
+          var sesler = JSON.parse(kayitliSesler);
+          if (sesler.siparis && sesler.siparis.data) {
+            siparisSesDosyasi = sesler.siparis.data;
+            console.log('✅ Sipariş sesi localStorage\'dan yüklendi:', sesler.siparis.isim);
+          }
+        } catch(e) {
+          console.log('⚠️ Ses verisi okunamadı:', e.message);
+        }
+      }
+      
+      if (!siparisSesDosyasi) {
+        console.log('⚠️ Hiçbir yerde sipariş sesi bulunamadı, varsayılan ses çalınacak');
+      }
+      
+      sesCal(siparisSesDosyasi, !!siparisSesDosyasi);
+    }
+    
+    // Ses çalma yardımcı fonksiyonu
+    function sesCal(audioData, ozelSes) {
+      if (typeof Audio !== 'undefined') {
+        window.sesCaliyor = true; // Ses çalmaya başladı
+        
+        var finalAudioData = audioData || 'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGS57OihUBELTKXh8bllHAU2jdXvzn0pBSh+zPDajzsKElyx6OyrWBQLSKDf8sFuIwUugc3y2Ik2CBhku+zooVARC0yl4fG5ZRwFNo3V7859KQUofsz';
+        var audio = new Audio(finalAudioData);
+        audio.volume = 0.8;
+        
+        // Ses bittiğinde flag'i temizle
+        audio.onended = function() {
+          window.sesCaliyor = false;
+          console.log('✅ Ses çalma tamamlandı');
+        };
+        
+        audio.play().catch(function(e) {
+          console.log('🔇 Ses çalınamadı:', e.message);
+          window.sesCaliyor = false; // Hata durumunda da temizle
+        });
+        
+        if (ozelSes) {
+          console.log('🔊 Sipariş sesi çalınıyor!');
+        } else {
+          console.log('🔊 Varsayılan bildirim sesi çalınıyor (Ses yöneticisinden ses yükleyin)');
+        }
+      }
+    }
+  };
+  
+  // Önce mevcut siparişleri say (ilk yükleme için)
+  database.ref(SITE_ID + '/siparisler').once('value', function(snapshot) {
+    var mevcutSiparisSayisi = snapshot.numChildren();
+    console.log('📊 Mevcut sipariş sayısı:', mevcutSiparisSayisi);
+    
+    // Eski listener'ları kaldır (eğer varsa)
+    database.ref(SITE_ID + '/siparisler').off('child_added');
+    console.log('🧹 Eski sipariş listener\'ları temizlendi');
+    
+    // Şimdi yeni siparişleri dinle - TEK BİR LISTENER
+    database.ref(SITE_ID + '/siparisler').on('child_added', function(snapshot) {
+      var siparis = snapshot.val();
+      
+      // İlk yükleme sırasında mevcut siparişleri atla
+      if (ilkYukleme) {
+        mevcutSiparisSayisi--;
+        if (mevcutSiparisSayisi <= 0) {
+          ilkYukleme = false;
+          console.log('✅ İlk yükleme tamamlandı, artık yeni siparişler için ses çalacak');
+        }
+        return;
+      }
+      
+      console.log('📦 YENİ SİPARİŞ ALGILANDI!', {
+        siparisNo: siparis ? siparis.siparisNo : 'yok',
+        musteri: siparis ? siparis.musteri : 'yok',
+        timestamp: siparis ? new Date(siparis.timestamp).toLocaleString('tr-TR') : 'yok'
+      });
+      
+      // Yeni sipariş geldi - ses çal
+      console.log('🔊 SES ÇALINIYOR...');
+      siparisSesCal();
+      
+      // Ekranda bildirim göster
+      if (typeof alert !== 'undefined') {
+        setTimeout(function() {
+          var mesaj = '🔔 YENİ SİPARİŞ!\n\n';
+          mesaj += 'Sipariş No: ' + (siparis.siparisNo || '-') + '\n';
+          mesaj += 'Müşteri: ' + (siparis.musteri || '-') + '\n';
+          mesaj += 'Tutar: ' + (siparis.tutar || '-');
+          // alert(mesaj); // İsterseniz açın
+        }, 100);
+      }
+    });
   });
       document.getElementById('notifications').innerHTML = html;
       document.getElementById('notifCount').textContent = yeniSiparisler.length;
@@ -1426,7 +1568,88 @@ function anaSayfaFirebaseBaslat() {
   function hesaplaDonusumOrani(ziyaretci) { var siparis = window.bugunSiparisSayisi || 0; var oran = ziyaretci > 0 ? ((siparis / ziyaretci) * 100).toFixed(1) : 0; document.getElementById('conversionRate').textContent = oran + '%'; }
   function hexToRgb(hex) { if(hex === 'gold') return '255,215,0'; if(hex === 'silver') return '192,192,192'; var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex); return result ? parseInt(result[1],16)+','+parseInt(result[2],16)+','+parseInt(result[3],16) : '255,255,255'; }
   window.sesAcik = true;
-  window.toggleSound = function() { window.sesAcik = !window.sesAcik; document.getElementById('soundBtn').textContent = window.sesAcik ? '🔊 Ses Açık' : '🔇 Ses Kapalı'; };
+  window.sesIzniVerildi = false; // Ses izni kontrolü
+  
+  // Ses izni al - İlk tıklamada sessiz bir ses çal
+  function sesIzniAl() {
+    if (window.sesIzniVerildi) return;
+    
+    try {
+      var sessizSes = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
+      sessizSes.volume = 0.01;
+      sessizSes.play().then(function() {
+        window.sesIzniVerildi = true;
+        console.log('✅ Ses izni verildi! Artık sipariş sesleri çalacak.');
+      }).catch(function(e) {
+        console.log('⚠️ Ses izni alınamadı:', e.message);
+      });
+    } catch(e) {
+      console.log('⚠️ Ses izni hatası:', e.message);
+    }
+  }
+  
+  // SAYFA AÇILINCA OTOMATİK SES İZNİ AL - Giriş sayfasında izin verildiyse tekrar sorma
+  var giristenIzinVerildi = localStorage.getItem('sesIzniVerildi') === 'true';
+  
+  if (giristenIzinVerildi) {
+    // Giriş sayfasında zaten izin verilmiş
+    console.log('✅ Ses izni daha önce verilmiş');
+    
+    // Sayfa yüklendiğinde ilk tıklamada ses iznini yenile
+    var sesYenilendi = false;
+    document.addEventListener('click', function sesYenile() {
+      if (!sesYenilendi) {
+        sesYenilendi = true;
+        document.removeEventListener('click', sesYenile);
+        
+        try {
+          var sessizSes = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
+          sessizSes.volume = 0.01;
+          sessizSes.play().then(function() {
+            window.sesIzniVerildi = true;
+            console.log('✅ Ses izni yenilendi, sipariş sesleri çalacak');
+          }).catch(function(e) {
+            console.log('⚠️ Ses izni yenilenemedi:', e.message);
+            window.sesIzniVerildi = false;
+          });
+        } catch(e) {
+          console.log('⚠️ Ses izni hatası:', e.message);
+        }
+      }
+    }, { once: false });
+  } else {
+    // İlk tıklamada ses iznini al
+    document.addEventListener('click', function sesAktifEt() {
+      if (!window.sesIzniVerildi) {
+        sesIzniAl();
+        document.removeEventListener('click', sesAktifEt);
+        
+        // Yeşil onay bildirimi göster
+        var bildirim = document.createElement('div');
+        bildirim.style.cssText = 'position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#28a745,#20c997);color:#fff;padding:12px 20px;border-radius:8px;z-index:99999;font-weight:bold;box-shadow:0 5px 20px rgba(40,167,69,0.5);font-size:13px;transition:all 0.3s';
+        bildirim.innerHTML = '✅ Sipariş sesi aktif!';
+        document.body.appendChild(bildirim);
+        
+        // 2 saniye sonra kaybol
+        setTimeout(function() {
+          bildirim.style.opacity = '0';
+          bildirim.style.transform = 'translateX(400px)';
+          setTimeout(function() { bildirim.remove(); }, 300);
+        }, 2000);
+      }
+    }, { once: false });
+  }
+  
+  window.toggleSound = function() { 
+    window.sesAcik = !window.sesAcik; 
+    var btn = document.getElementById('soundBtn');
+    if (btn) btn.textContent = window.sesAcik ? '🔊 Ses Açık' : '🔇 Ses Kapalı';
+    
+    // Ses kapatıldığında/açıldığında bildirim
+    if (window.sesAcik && !window.sesIzniVerildi) {
+      sesIzniAl();
+    }
+  };
   
   // ==================== CANLI ZİYARETÇİ TAKİBİ KAPALI (Admin paneli) ====================
   // Ana sayfa admin paneli olduğu için ziyaretçi olarak sayılmıyor
@@ -1437,8 +1660,12 @@ console.log('🔍 Firebase kontrol başlıyor...');
 console.log('🔍 onFirebaseReady tanımlı mı:', typeof onFirebaseReady);
 console.log('🔍 database tanımlı mı:', typeof database);
 
+var anaSayfaBaslatildi = false; // Sadece bir kere çalışsın
+
 if (typeof onFirebaseReady === 'function') {
   onFirebaseReady(function(db) {
+    if (anaSayfaBaslatildi) return;
+    anaSayfaBaslatildi = true;
     console.log('🚀 Ana sayfa Firebase hazır, başlatılıyor...');
     console.log('🔍 Database objesi:', db);
     setTimeout(anaSayfaFirebaseBaslat, 100);
@@ -1448,6 +1675,8 @@ if (typeof onFirebaseReady === 'function') {
   var firebaseCheckInterval = setInterval(function() {
     if (typeof database !== 'undefined' && database) {
       clearInterval(firebaseCheckInterval);
+      if (anaSayfaBaslatildi) return;
+      anaSayfaBaslatildi = true;
       console.log('🚀 Ana sayfa Firebase hazır (bekleme ile), başlatılıyor...');
       setTimeout(anaSayfaFirebaseBaslat, 100);
     }
@@ -2090,10 +2319,7 @@ window.addEventListener('load', saatlikGrafigiBagla);
 <h3 style="color:#4CAF50;margin:0 0 10px;font-size:16px">📋 SİPARİŞ TAKİBİ</h3>
 <p style="color:#aaa;font-size:13px;line-height:1.6;margin:0">Tüm siparişleri görün ve yönetin. Durum güncelleme (Beklemede, Hazırlanıyor, Kargoda, Teslim Edildi), filtreleme ve arama özellikleri.</p>
 </div>
-<div style="margin-bottom:20px;background:rgba(0,0,0,0.3);border-radius:12px;padding:15px;border-left:4px solid #2C3E50">
-<h3 style="color:#95a5a6;margin:0 0 10px;font-size:16px">⚙️ OTOMASYON</h3>
-<p style="color:#aaa;font-size:13px;line-height:1.6;margin:0">Otomatik işlemler tanımlayın. Yeni sipariş bildirimi, stok uyarısı, günlük rapor gönderimi gibi otomasyonlar kurun.</p>
-</div>
+
 <!-- POLİTİKALAR AÇIKLAMASI KALDIRILDI -->
 <div style="margin-bottom:20px;background:rgba(0,0,0,0.3);border-radius:12px;padding:15px;border-left:4px solid #e94560">
 <h3 style="color:#e94560;margin:0 0 10px;font-size:16px">🤖 GARİBAN (Yapay Zeka)</h3>
